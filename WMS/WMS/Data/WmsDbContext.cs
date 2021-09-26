@@ -25,20 +25,57 @@ namespace WMS.Data
         /// <summary>
         /// Таблица содержания товаров на складе
         /// </summary>
-        public DbSet<WarehouseItem> ItemWarehouses { get; set; }
+        public DbSet<WarehouseItem> WarehouseItems { get; set; }
         /// <summary>
         /// Начальные данные при создании модели
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Склады
+
             modelBuilder.Entity<Warehouse>().Property(w => w.Id).ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<Warehouse>().HasData(
+            Warehouse[] warehouses = new Warehouse[]
+            {
                 new Warehouse { Id = 1, Name = "Склад миниатюрный", MaximumItems = 100 },
                 new Warehouse { Id = 2, Name = "Склад приличный", MaximumItems = 10000 },
                 new Warehouse { Id = 3, Name = "Склад здоровенный", MaximumItems = 1000000 }
-                );
+            };
+
+            modelBuilder.Entity<Warehouse>().HasData(warehouses);
+
+            // Товары
+
+            modelBuilder.Entity<Item>().Property(i => i.Id).ValueGeneratedOnAdd();
+
+            Item[] items = new Item[] {
+                new Item { Id = 1, Name = "Карандаш", Price = 10.00m },
+                new Item { Id = 2, Name = "Ручка", Price = 20.00m },
+                new Item { Id = 3, Name = "Фломастер", Price = 30.00m }
+                };
+
+            modelBuilder.Entity<Item>().HasData(items);
+
+            // Содержание товара на складе
+
+            // modelBuilder.Entity<WarehouseItem>().Property(wi => wi.Id).ValueGeneratedOnAdd();
+
+            //WarehouseItem[] warehouseItems = new WarehouseItem[3];
+
+            //for (int i = 0; i < warehouseItems.Length; i++)
+            //{
+            //    warehouseItems[i] = new WarehouseItem
+            //    {
+            //        Id = i + 1,
+            //        Item = items[i],
+            //        ItemId = items[i].Id,
+            //        Warehouse = warehouses[i],
+            //        WarehouseId = warehouses[i].Id
+            //    };
+            //}
+
+            //modelBuilder.Entity<WarehouseItem>().HasData(warehouseItems);
         }
     }
 }

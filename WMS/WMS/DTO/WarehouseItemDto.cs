@@ -17,5 +17,9 @@
         /// Идентификатор товара
         /// </summary>
         public long ItemId { get; set; }
+        /// <summary>
+        /// Количество товара на складе
+        /// </summary>
+        // public long Count { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace WMS.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+
+namespace WMS.Models
 {
     /// <summary>
     /// Товар
@@ -12,6 +15,7 @@
         /// <summary>
         /// Цена товара
         /// </summary>
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
     }
 }
