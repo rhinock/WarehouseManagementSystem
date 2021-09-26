@@ -51,9 +51,9 @@ namespace WMS.Services
                 {
                     return ValidationResult.FailureResult(
                         new JsonResult(
-                            $"товар: {item.Name}, количество: {dto.Count}\n" +
-                            $"склад: {warehouse.Name}, максимальное количество товаров: {warehouse.MaximumItems}\n" +
-                            $"текущая заполненность склада: {warehouseItemsCurrentCount}\n" +
+                            $"товар: {item.Name}, количество: {dto.Count}\\n" +
+                            $"склад: {warehouse.Name}, максимальное количество товаров: {warehouse.MaximumItems}\\n" +
+                            $"текущая заполненность склада: {warehouseItemsCurrentCount}\\n" +
                             $"добавляемое количество товара не должно превышать максимальное количество товаров")
                             {
                                 StatusCode = StatusCodes.Status400BadRequest
@@ -113,9 +113,9 @@ namespace WMS.Services
                 {
                     return ValidationResult.FailureResult(
                     new JsonResult(
-                        $"товар: {item.Name}, количество: {dto.Count}\n" +
-                        $"склад: {warehouse.Name}, максимальное количество товаров: {warehouse.MaximumItems}\n" +
-                        $"текущая заполненность склада: {warehouseItemsCurrentCount}\n" +
+                        $"товар: {item.Name}, количество: {dto.Count}\\n" +
+                        $"склад: {warehouse.Name}, максимальное количество товаров: {warehouse.MaximumItems}\\n" +
+                        $"текущая заполненность склада: {warehouseItemsCurrentCount}\\n" +
                         $"добавляемое количество товара не должно превышать максимальное количество товаров")
                     {
                         StatusCode = StatusCodes.Status400BadRequest

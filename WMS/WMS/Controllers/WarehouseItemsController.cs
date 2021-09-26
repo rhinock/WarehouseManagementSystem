@@ -1,12 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using WMS.DTO;
 using WMS.Models;
-using WMS.Utils;
 
 
 namespace WMS.Controllers
@@ -26,7 +21,7 @@ namespace WMS.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var result = _readService.Get(id);
+            var result = _dataService.Delete(id);
 
             if (!result.Success)
             {
