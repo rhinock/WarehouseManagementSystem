@@ -20,6 +20,6 @@
         /// <summary>
         /// Количество товара на складе
         /// </summary>
-        // public long Count { get; set; }
+        public long Count { get; set; }
     }
 }
