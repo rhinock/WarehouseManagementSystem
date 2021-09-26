@@ -34,7 +34,7 @@ namespace WMS.Controllers
         [HttpPost]
         public virtual IActionResult Insert(TDto dto)
         {
-            ValidationResult validationResult = ValidateBeforeUpdate(dto);
+            ValidationResult validationResult = ValidateBeforeInsert(dto);
 
             if (!validationResult.Success)
             {
@@ -104,7 +104,6 @@ namespace WMS.Controllers
             }
 
             T entity = _dbContext.Find<T>(dto.Id);
-                       
             
             if (entity == null)
             {
