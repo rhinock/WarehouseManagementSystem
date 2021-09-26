@@ -49,30 +49,44 @@ namespace WMS.Controllers
                 return baseValidationResult;
             }
 
-            Item item = _dbContext.Set<Item>()
-                .FirstOrDefault(i => i.Id == dto.ItemId);
-
-            if (item == null)
-                return ValidationResult.FailureResult(NotFound());
-
             Warehouse warehouse = _dbContext.Set<Warehouse>()
                 .FirstOrDefault(w => w.Id == dto.WarehouseId);
 
             if (warehouse == null)
                 return ValidationResult.FailureResult(NotFound());
 
+            Item item = _dbContext.Set<Item>()
+                .FirstOrDefault(i => i.Id == dto.ItemId);
+
+            if (item == null)
+                return ValidationResult.FailureResult(NotFound());
+
+            long? warehouseItemsCurrentCount =
+                _dbContext
+                    .Set<WarehouseItem>()
+                    .Where(w => w.WarehouseId == dto.WarehouseId)
+                    .Sum(c => c.Count);
+
+            if (warehouseItemsCurrentCount != null)
+            {
+                if (dto.Count + warehouseItemsCurrentCount > warehouse.MaximumItems)
+                    return ValidationResult.FailureResult(
+                        BadRequest(
+                            $"товар: {item.Name}, количество: {dto.Count}\n" +
+                            $"склад: {warehouse.Name}, максимальное количество товаров: {warehouse.MaximumItems}\n" +
+                            $"текущая заполненность склада: {warehouseItemsCurrentCount}\n" +
+                            $"добавляемое количество товара не должно превышать максимальное количество товаров"
+                            ));
+            }
+
             WarehouseItem warehouseItem = new WarehouseItem
             {
                 Item = item,
                 ItemId = item.Id,
                 Warehouse = warehouse,
-                WarehouseId = warehouse.Id
+                WarehouseId = warehouse.Id,
+                Count = dto.Count
             };
-
-            // warehouseItem.Count = dto.Count;
-
-            //_dbContext.Update(warehouseItem);
-            //_dbContext.SaveChanges();
 
             return new ValidationResult()
             {
@@ -83,23 +97,54 @@ namespace WMS.Controllers
         /// <inheritdoc />
         protected override ValidationResult ValidateBeforeUpdate(WarehouseItemDto dto)
         {
-            return base.ValidateBeforeUpdate(dto);
+            // return base.ValidateBeforeUpdate(dto);
 
-            //WarehouseItem warehouseItem =
-            //    _dbContext
-            //        .Set<WarehouseItem>()
-            //        .FirstOrDefault(w =>
-            //            w.ItemId == dto.ItemId &&
-            //            w.WarehouseId == dto.WarehouseId);
+            ValidationResult baseValidationResult = base.ValidateBeforeUpdate(dto);
 
-            //if (warehouseItem == null)
-            //    return ValidationResult.FailureResult(NotFound());
+            if (!baseValidationResult.Success)
+            {
+                return baseValidationResult;
+            }
 
-            //return new ValidationResult()
-            //{
-            //    Success = true,
-            //    EntityCache = new Dictionary<string, ModelBase>() { ["entity"] = warehouseItem }
-            //};
+            WarehouseItem warehouseItem = baseValidationResult.EntityCache["entity"] as WarehouseItem;
+
+            Warehouse warehouse = _dbContext.Set<Warehouse>()
+                .FirstOrDefault(w => w.Id == dto.WarehouseId);
+
+            if (warehouse == null)
+                return ValidationResult.FailureResult(NotFound());
+
+            Item item = _dbContext.Set<Item>()
+                .FirstOrDefault(i => i.Id == dto.ItemId);
+
+            if (item == null)
+                return ValidationResult.FailureResult(NotFound());
+
+            long? warehouseItemsCurrentCount =
+                _dbContext
+                    .Set<WarehouseItem>()
+                    .Where(w => w.WarehouseId == dto.WarehouseId && w.Id != dto.Id)
+                    .Sum(c => c.Count);
+
+            if (warehouseItemsCurrentCount != null)
+            {
+                if (dto.Count + warehouseItemsCurrentCount > warehouse.MaximumItems)
+                    return ValidationResult.FailureResult(
+                        BadRequest(
+                            $"товар: {item.Name}, количество: {dto.Count}\n" +
+                            $"склад: {warehouse.Name}, максимальное количество товаров: {warehouse.MaximumItems}\n" +
+                            $"текущая заполненность склада: {warehouseItemsCurrentCount}\n" +
+                            $"добавляемое количество товара не должно превышать максимальное количество товаров"
+                            ));
+            }
+
+            warehouseItem.Count = dto.Count;
+
+            return new ValidationResult()
+            {
+                Success = true,
+                EntityCache = new Dictionary<string, ModelBase>() { ["entity"] = warehouseItem }
+            };
         }
     }
 }
