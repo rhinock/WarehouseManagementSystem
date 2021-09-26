@@ -8,6 +8,9 @@ using WMS.Utils;
 
 namespace WMS.Services
 {
+    /// <summary>
+    /// Сервис товаров
+    /// </summary>
     public class ItemsService : ServiceBase<Item, ItemDto>
     {
         public ItemsService(IServiceProvider serviceProvider) : base(serviceProvider)
@@ -57,6 +60,11 @@ namespace WMS.Services
 
             return ValidationResult.SuccessResult();
         }
+        /// <summary>
+        /// Кастомизированный вывод ошибки с сообщением
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         private ValidationResult ReturnBadRequest(string message)
         {
             return ValidationResult.FailureResult(

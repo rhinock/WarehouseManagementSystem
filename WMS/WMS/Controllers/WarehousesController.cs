@@ -1,5 +1,4 @@
 ﻿using WMS.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace WMS.Controllers

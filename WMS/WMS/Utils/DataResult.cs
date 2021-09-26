@@ -3,6 +3,10 @@
 
 namespace WMS.Utils
 {
+    /// <summary>
+    /// Кастомизированный результат обработки данных
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DataResult<T>
     {
         public bool Success { get; set; }

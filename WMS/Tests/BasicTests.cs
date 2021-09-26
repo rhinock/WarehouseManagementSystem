@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 using WMS;
 using System.Threading.Tasks;
 
 namespace Tests
 {
-    public class BasicTests
-    : IClassFixture<WebApplicationFactory<Startup>>
+    /// <summary>
+    /// Базовые тесты
+    /// </summary>
+    public class BasicTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
 

@@ -1,7 +1,5 @@
 ﻿using WMS.Models;
-using Microsoft.EntityFrameworkCore;
 using WMS.DTO;
-using AutoMapper;
 using System;
 
 namespace WMS.Controllers

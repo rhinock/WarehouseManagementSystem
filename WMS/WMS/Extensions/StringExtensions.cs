@@ -2,6 +2,9 @@
 
 namespace WMS.Extensions
 {
+    /// <summary>
+    /// Метод расширения для строк
+    /// </summary>
     public static class StringExtensions
     {
         /// <summary>

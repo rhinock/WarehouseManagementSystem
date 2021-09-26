@@ -8,10 +8,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace Tests
 {
+    /// <summary>
+    /// Тесты для склада
+    /// </summary>
     public class WarehouseTests : IntegrationTestBase
     {
         public WarehouseTests(WebApplicationFactory<Startup> factory)
             : base(factory, "api/warehouses") { }
+        /// <summary>
+        /// Получить все склады
+        /// </summary>
+        /// <returns>True</returns>
         [Fact]
         public async Task GetAllWarehouses()
         {
@@ -23,6 +30,13 @@ namespace Tests
             Assert.NotNull(warehouses);
             Assert.True(warehouses.Count > 0);
         }
+        /// <summary>
+        /// Получить склад по идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="maximumItems"></param>
+        /// <returns>True</returns>
         [Theory]
         [InlineData(1, "Склад миниатюрный", 100)]
         [InlineData(2, "Склад приличный", 10000)]
@@ -40,6 +54,11 @@ namespace Tests
             Assert.Equal(name, warehouse.Name);
             Assert.Equal(maximumItems, warehouse.MaximumItems);
         }
+        /// <summary>
+        /// Поиск склада по некорректном идентификатору (не найдено)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>StatusCodes.Status404NotFound</returns>
         [Theory]
         [InlineData(0), InlineData(long.MaxValue)]
         public async Task GetWarehouseByIncorrectId(long id)

@@ -3,7 +3,6 @@ using System;
 using WMS.DTO;
 using WMS.Models;
 
-
 namespace WMS.Controllers
 {
     /// <summary>
@@ -17,7 +16,7 @@ namespace WMS.Controllers
         /// Удаление товара со склада
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>NoContent()</returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {

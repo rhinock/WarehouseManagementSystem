@@ -9,6 +9,9 @@ using WMS.Utils;
 
 namespace WMS.Services
 {
+    /// <summary>
+    /// Сервис для товаров на складе
+    /// </summary>
     public class WarehouseItemsService : ServiceBase<WarehouseItem, WarehouseItemDto>
     {
         public WarehouseItemsService(IServiceProvider serviceProvider) : base(serviceProvider)

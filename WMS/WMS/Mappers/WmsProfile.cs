@@ -2,7 +2,6 @@
 using WMS.DTO;
 using WMS.Models;
 
-
 namespace WMS.Mappers
 {
     /// <summary>

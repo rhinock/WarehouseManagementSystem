@@ -1,12 +1,7 @@
 ﻿using WMS.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using WMS.Utils;
 using System;
 using WMS.Services;
-using WMS.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace WMS.Controllers
@@ -24,13 +19,12 @@ namespace WMS.Controllers
         public ReadControllerBase(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            // _readService = _serviceProvider.Get<IReadService<T>>();
             _readService = _serviceProvider.GetService<IReadService<T>>();
         }
         /// <summary>
         /// Получить весь список элементов
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Ok(result.Data)</returns>
         [HttpGet]
         public virtual IActionResult Get()
         {
@@ -47,7 +41,7 @@ namespace WMS.Controllers
         /// Получить список элементов по id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Ok(result.Data)</returns>
         [HttpGet("{id}")]
         public virtual IActionResult Get(long id)
         {

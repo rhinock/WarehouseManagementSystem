@@ -12,10 +12,14 @@ using Xunit;
 
 namespace Tests
 {
+    /// <summary>
+    /// Тесты товаров
+    /// </summary>
     public class ItemTests : IntegrationTestBase
     {
         public ItemTests(WebApplicationFactory<Startup> factory)
             : base(factory, "api/items") { }
+
         /// <summary>
         /// Получить все товары
         /// </summary>

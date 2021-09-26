@@ -26,7 +26,7 @@ namespace WMS.Controllers
         /// Создание склада или товара
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>Ok(result.Data)</returns>
         [HttpPost]
         public virtual IActionResult Insert(TDto dto)
         {
@@ -43,7 +43,7 @@ namespace WMS.Controllers
         /// Изменение склада или товара
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>NoContent()</returns>
         [HttpPut]
         public virtual IActionResult Update(TDto dto)
         {

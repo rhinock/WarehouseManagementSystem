@@ -12,6 +12,11 @@ using WMS.Utils;
 
 namespace WMS.Services
 {
+    /// <summary>
+    /// базовый сервис
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TDto"></typeparam>
     public class ServiceBase<T, TDto> : IDataService<T, TDto>
         where T : ModelBase
         where TDto: IHaveId
@@ -29,11 +34,19 @@ namespace WMS.Services
             _dbContext = _serviceProvider.GetService(typeof(DbContext)) as DbContext;
             _mapper = _serviceProvider.GetService(typeof(IMapper)) as IMapper;
         }
-
+        /// <summary>
+        /// Получить данные
+        /// </summary>
+        /// <returns>DataResult<IEnumerable<T>>.SuccessResult(_dbContext.GetAll<T>(true).ToList())</returns>
         public virtual DataResult<IEnumerable<T>> Get()
         {
             return DataResult<IEnumerable<T>>.SuccessResult(_dbContext.GetAll<T>(true).ToList());
         }
+        /// <summary>
+        /// Получить данные по идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>DataResult<T>.SuccessResult(entity)</returns>
         public virtual DataResult<T> Get(long id)
         {
             T entity = _dbContext.GetAll<T>(true).FirstOrDefault(w => w.Id == id);
@@ -45,6 +58,11 @@ namespace WMS.Services
 
             return DataResult<T>.SuccessResult(entity);
         }
+        /// <summary>
+        /// Добавить данные
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>DataResult<T>.SuccessResult(entity)</returns>
         public virtual DataResult<T> Insert(TDto dto)
         {
             ValidationResult validationResult = ValidateBeforeInsert(dto);
@@ -61,6 +79,11 @@ namespace WMS.Services
 
             return DataResult<T>.SuccessResult(entity);
         }
+        /// <summary>
+        /// Обновить данные
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>DataResult<T>.SuccessResult()</returns>
         public virtual DataResult<T> Update(TDto dto)
         {
             ValidationResult validationResult = ValidateBeforeUpdate(dto);
@@ -79,6 +102,11 @@ namespace WMS.Services
 
             return DataResult<T>.SuccessResult();
         }
+        /// <summary>
+        /// Удалить данные
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>DataResult<T>.SuccessResult()</returns>
         public DataResult<T> Delete(long id)
         {
             WarehouseItem entity = _dbContext.Set<WarehouseItem>().FirstOrDefault(w => w.Id == id);
@@ -97,7 +125,7 @@ namespace WMS.Services
         /// Валидация перед созданием
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>ValidationResult.SuccessResult()</returns>
         protected virtual ValidationResult ValidateBeforeInsert(TDto dto)
         {
             if (dto == null)
@@ -120,7 +148,7 @@ namespace WMS.Services
         /// Валидация перед изменением
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>ValidationResult</returns>
         protected virtual ValidationResult ValidateBeforeUpdate(TDto dto)
         {
             if (dto == null)
@@ -141,6 +169,5 @@ namespace WMS.Services
                 EntityCache = new Dictionary<string, ModelBase>() { ["entity"] = entity }
             };
         }
-        
     }
 }

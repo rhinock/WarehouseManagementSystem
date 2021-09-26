@@ -8,6 +8,9 @@ using System.Text;
 
 namespace Tests
 {
+    /// <summary>
+    /// Базовые интеграционные тесты
+    /// </summary>
     public class IntegrationTestBase : IClassFixture<WebApplicationFactory<Startup>>
     {
         protected readonly HttpClient _httpClient;
