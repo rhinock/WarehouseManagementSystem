@@ -70,7 +70,7 @@ namespace WMS.Services
                 return DataResult<T>.FailureResult(validationResult.ErrorResult);
             }
 
-            T entity = validationResult.EntityCache["entity"] as T;
+            T entity = _dbContext.Set<T>().Single(e => e.Id == dto.Id);
 
             _mapper.Map<TDto, T>(dto, entity);
 
@@ -93,6 +93,11 @@ namespace WMS.Services
 
             return DataResult<T>.SuccessResult();
         }
+        /// <summary>
+        /// Валидация перед созданием
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         protected virtual ValidationResult ValidateBeforeInsert(TDto dto)
         {
             if (dto == null)
@@ -111,6 +116,11 @@ namespace WMS.Services
 
             return ValidationResult.SuccessResult();
         }
+        /// <summary>
+        /// Валидация перед изменением
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         protected virtual ValidationResult ValidateBeforeUpdate(TDto dto)
         {
             if (dto == null)

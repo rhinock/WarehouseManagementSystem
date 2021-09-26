@@ -56,6 +56,36 @@ namespace WMS.Data
                 };
 
             modelBuilder.Entity<Item>().HasData(items);
+
+            // Товары на складе
+
+            modelBuilder.Entity<WarehouseItem>().Property(wi => wi.Id).ValueGeneratedOnAdd();
+
+            WarehouseItem[] warehouseItems = new WarehouseItem[] {
+                new WarehouseItem
+                {
+                    Id = 1,
+                    ItemId = items[0].Id,
+                    Count = 50,
+                    WarehouseId = warehouses[0].Id
+                },
+                new WarehouseItem
+                {
+                    Id = 2,
+                    ItemId = items[1].Id,
+                    Count = 5000,
+                    WarehouseId = warehouses[1].Id
+                },
+                new WarehouseItem
+                {
+                    Id = 3,
+                    ItemId = items[2].Id,
+                    Count = 500000,
+                    WarehouseId = warehouses[2].Id
+                }
+            };
+
+            modelBuilder.Entity<WarehouseItem>().HasData(warehouseItems);
         }
     }
 }

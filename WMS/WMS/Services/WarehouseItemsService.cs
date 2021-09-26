@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WMS.DTO;
 using WMS.Models;
 using WMS.Utils;
@@ -18,13 +17,20 @@ namespace WMS.Services
         /// <inheritdoc />
         protected override ValidationResult ValidateBeforeInsert(WarehouseItemDto dto)
         {
-            // return base.ValidateBeforeInsert(dto);
-
             ValidationResult baseValidationResult = base.ValidateBeforeInsert(dto);
 
             if (!baseValidationResult.Success)
             {
                 return baseValidationResult;
+            }
+
+            if (dto.Count < 0)
+            {
+                return ValidationResult.FailureResult(
+                    new JsonResult("Количество товара должно быть положительным числом")
+                    {
+                        StatusCode = StatusCodes.Status400BadRequest
+                    });
             }
 
             Warehouse warehouse = _dbContext.Set<Warehouse>()
@@ -84,6 +90,15 @@ namespace WMS.Services
             if (!baseValidationResult.Success)
             {
                 return baseValidationResult;
+            }
+
+            if (dto.Count < 0)
+            {
+                return ValidationResult.FailureResult(
+                    new JsonResult("Количество товара должно быть положительным числом")
+                    {
+                        StatusCode = StatusCodes.Status400BadRequest
+                    });
             }
 
             WarehouseItem warehouseItem = baseValidationResult.EntityCache["entity"] as WarehouseItem;

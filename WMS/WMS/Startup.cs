@@ -41,9 +41,10 @@ namespace WMS
             // services.AddTransient<IReadService<Warehouse>, ServiceBase<Warehouse, WarehouseDto>>();
             // services.AddTransient<DataResult<object>, DataResult<object>>();
 
-            services.RegisterDataService<ServiceBase<Item, ItemDto>, Item, ItemDto>();
+            // services.RegisterDataService<ServiceBase<Item, ItemDto>, Item, ItemDto>();
             services.RegisterDataService<ServiceBase<Warehouse, WarehouseDto>, Warehouse, WarehouseDto>();
             services.RegisterDataService<WarehouseItemsService, WarehouseItem, WarehouseItemDto>();
+            services.RegisterDataService<ItemsService, Item, ItemDto>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
