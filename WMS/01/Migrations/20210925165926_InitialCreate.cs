@@ -2,6 +2,9 @@
 
 namespace WMS.Migrations
 {
+    /// <summary>
+    /// Миграция №1
+    /// </summary>
     public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

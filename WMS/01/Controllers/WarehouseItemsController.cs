@@ -1,20 +1,26 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WMS.DTO;
 using WMS.Models;
 using WMS.Utils;
 
+
 namespace WMS.Controllers
 {
+    /// <summary>
+    /// Контроллер для содержания товаров на складе
+    /// </summary>
     public class WarehouseItemsController : BaseDataController<WarehouseItem, WarehouseItemDto>
     {
         public WarehouseItemsController(DbContext dbContext, IMapper mapper) : base(dbContext, mapper) {}
 
+        /// <summary>
+        /// Удаление товара со склада
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {

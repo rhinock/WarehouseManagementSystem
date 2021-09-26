@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WMS.DTO
+﻿namespace WMS.DTO
 {
+    /// <summary>
+    /// DTO (Data Tranfser Object) для Item (товар)</see>
+    /// </summary>
     public class ItemDto : IHaveId
     {
         /// <summary>

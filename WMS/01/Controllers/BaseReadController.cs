@@ -7,6 +7,10 @@ using System.Linq;
 
 namespace WMS.Controllers
 {
+    /// <summary>
+    /// Базовый контроллер для чтения данных
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [Route("api/[controller]")]
     [ApiController]
     public class BaseReadController<T> : ControllerBase where T: ModelBase

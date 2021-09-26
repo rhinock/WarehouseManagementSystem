@@ -1,5 +1,8 @@
 ﻿namespace WMS.DTO
 {
+    /// <summary>
+    /// DTO для WarehouseItem (содержание товара на складе)
+    /// </summary>
     public class WarehouseItemDto : IHaveId
     {
         /// <summary>
