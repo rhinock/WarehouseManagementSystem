@@ -13,6 +13,7 @@ namespace WMS.Mappers
         public WmsProfile()
         {
             CreateMap<ItemDto, Item>();
+            // CreateMap<WarehouseDto, Warehouse>(); // только чтение
             CreateMap<WarehouseItemDto, WarehouseItem>();
         }
     }

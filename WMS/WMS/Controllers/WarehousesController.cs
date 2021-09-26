@@ -1,15 +1,15 @@
 ﻿using WMS.Models;
 using Microsoft.EntityFrameworkCore;
-
+using System;
 
 namespace WMS.Controllers
 {
     /// <summary>
     /// Контроллер для складов
     /// </summary>
-    public class WarehousesController : BaseReadController<Warehouse>
+    public class WarehousesController : ReadControllerBase<Warehouse>
     {
-        public WarehousesController(DbContext dbContext):
-            base(dbContext) {}
+        public WarehousesController(IServiceProvider serviceProvider) :
+            base(serviceProvider) {}
     }
 }
