@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using WMS.Services;
 using Microsoft.Extensions.DependencyInjection;
+using WMS.Utils;
+using Microsoft.AspNetCore.Http;
+using WMS.Extensions;
 
 namespace WMS.Controllers
 {
@@ -28,14 +31,7 @@ namespace WMS.Controllers
         [HttpGet]
         public virtual IActionResult Get()
         {
-            var result = _readService.Get();
-
-            if (!result.Success)
-            {
-                return result.ErrorResult;
-            }
-
-            return Ok(result.Data);
+            return HandleRequest(_readService.Get());
         }
         /// <summary>
         /// Получить список элементов по id
@@ -45,14 +41,46 @@ namespace WMS.Controllers
         [HttpGet("{id}")]
         public virtual IActionResult Get(long id)
         {
-            var result = _readService.Get(id);
+            return HandleRequest(_readService.Get(id));
+        }
 
-            if (!result.Success)
+        public virtual IActionResult HandleRequest<TResult>(DataResult<TResult> dataResult)
+        {
+            switch (dataResult.ErrorResult)
             {
-                return result.ErrorResult;
-            }
+                //case ErrorResult.Created:
+                //    return Created(;
 
-            return Ok(result.Data);
+                case BusinessResult.NoContent:
+                    if (dataResult.Message.IsEmpty())
+                    {
+                        return NoContent();
+                    }
+                    return new JsonResult(dataResult.Message ?? string.Empty)
+                    {
+                        StatusCode = StatusCodes.Status204NoContent
+                    };
+                case BusinessResult.BadRequest:
+                    if (dataResult.Message.IsEmpty())
+                    {
+                        return BadRequest();
+                    }
+                    return new JsonResult(dataResult.Message ?? string.Empty)
+                    {
+                        StatusCode = StatusCodes.Status400BadRequest
+                    };
+                case BusinessResult.NotFound:
+                    if (dataResult.Message.IsEmpty())
+                    {
+                        return NotFound();
+                    }
+                    return new JsonResult(dataResult.Message ?? string.Empty)
+                    {
+                        StatusCode = StatusCodes.Status404NotFound
+                    };
+                default:
+                    return Ok(dataResult.Data);
+            }
         }
     }
 }

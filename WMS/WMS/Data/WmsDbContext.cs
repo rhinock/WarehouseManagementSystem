@@ -35,6 +35,7 @@ namespace WMS.Data
             // Склады
 
             modelBuilder.Entity<Warehouse>().Property(w => w.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Warehouse>().HasIndex(w => w.Name).IsUnique();
 
             Warehouse[] warehouses = new Warehouse[]
             {
@@ -48,6 +49,7 @@ namespace WMS.Data
             // Товары
 
             modelBuilder.Entity<Item>().Property(i => i.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Item>().HasIndex(i => i.Name).IsUnique();
 
             Item[] items = new Item[] {
                 new Item { Id = 1, Name = "Карандаш", Price = 10.00m },
@@ -60,6 +62,7 @@ namespace WMS.Data
             // Товары на складе
 
             modelBuilder.Entity<WarehouseItem>().Property(wi => wi.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<WarehouseItem>().HasIndex(wi => new { wi.WarehouseId, wi.ItemId } ).IsUnique();
 
             WarehouseItem[] warehouseItems = new WarehouseItem[] {
                 new WarehouseItem

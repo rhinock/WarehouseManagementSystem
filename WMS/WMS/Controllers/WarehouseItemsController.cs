@@ -20,14 +20,7 @@ namespace WMS.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var result = _dataService.Delete(id);
-
-            if (!result.Success)
-            {
-                return result.ErrorResult;
-            }
-
-            return NoContent(); 
+            return HandleRequest(_dataService.Delete(id));
         }
     }
 }

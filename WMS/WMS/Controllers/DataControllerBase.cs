@@ -30,14 +30,8 @@ namespace WMS.Controllers
         [HttpPost]
         public virtual IActionResult Insert(TDto dto)
         {
-            var result = _dataService.Insert(dto);
-
-            if (!result.Success)
-            {
-                return result.ErrorResult;
-            }
-
-            return Ok(result.Data);
+            var a = this.HttpContext.Request.Path;
+            return HandleRequest(_dataService.Insert(dto));
         }
         /// <summary>
         /// Изменение склада или товара
@@ -47,14 +41,7 @@ namespace WMS.Controllers
         [HttpPut]
         public virtual IActionResult Update(TDto dto)
         {
-            var result = _dataService.Update(dto);
-
-            if (!result.Success)
-            {
-                return result.ErrorResult;
-            }
-
-            return NoContent();
+            return HandleRequest(_dataService.Update(dto));
         }
     }
 }
