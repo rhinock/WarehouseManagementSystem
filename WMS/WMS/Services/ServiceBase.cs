@@ -40,7 +40,7 @@ namespace WMS.Services
         /// <returns>DataResult<IEnumerable<T>>.SuccessResult(_dbContext.GetAll<T>(true).ToList())</returns>
         public virtual DataResult<IEnumerable<T>> Get()
         {
-            return DataResult<IEnumerable<T>>.SuccessResult(_dbContext.GetAll<T>(true).ToList());
+            return DataResult<IEnumerable<T>>.SuccessResult(BusinessResult.OK, _dbContext.GetAll<T>(true).ToList());
         }
         /// <summary>
         /// Получить данные по идентификатору
@@ -58,7 +58,7 @@ namespace WMS.Services
                 return DataResult<T>.FailureResult(BusinessResult.NotFound);
             }
 
-            return DataResult<T>.SuccessResult(entity);
+            return DataResult<T>.SuccessResult(BusinessResult.OK, entity);
         }
         /// <summary>
         /// Добавить данные
@@ -68,11 +68,11 @@ namespace WMS.Services
         public virtual DataResult<T> Insert(TDto dto)
         {
             ValidationResult validationResult = ValidateBeforeInsert(dto);
-            DataResult<T> dataResult = new DataResult<T>();
+            // DataResult<T> dataResult = new DataResult<T>();
 
             if (!validationResult.Success)
             {
-                return DataResult<T>.FailureResult(validationResult.ErrorResult);
+                return DataResult<T>.FailureResult(validationResult.BusinessResult, validationResult.Message);
                 //dataResult.Success = validationResult.Success;
                 //dataResult.ErrorResult = validationResult.ErrorResult;
             }
@@ -82,7 +82,7 @@ namespace WMS.Services
             _dbContext.Add<T>(entity);
             _dbContext.SaveChanges();
 
-            return DataResult<T>.SuccessResult(entity);
+            return DataResult<T>.SuccessResult(BusinessResult.Created, entity);
             //dataResult.Data = entity;
             //return dataResult;
         }
@@ -97,8 +97,7 @@ namespace WMS.Services
 
             if (!validationResult.Success)
             {
-                // return DataResult<T>.FailureResult(validationResult.ErrorResult);
-
+                return DataResult<T>.FailureResult(validationResult.BusinessResult);
             }
 
             T entity = _dbContext.Set<T>().Single(e => e.Id == dto.Id);
@@ -108,7 +107,7 @@ namespace WMS.Services
             _dbContext.Update(entity);
             _dbContext.SaveChanges();
 
-            return DataResult<T>.SuccessResult();
+            return DataResult<T>.SuccessResult(BusinessResult.NoContent);
         }
         /// <summary>
         /// Удалить данные
@@ -127,7 +126,7 @@ namespace WMS.Services
             _dbContext.Remove<WarehouseItem>(entity);
             _dbContext.SaveChanges();
 
-            return DataResult<T>.SuccessResult();
+            return DataResult<T>.SuccessResult(BusinessResult.OK);
         }
         /// <summary>
         /// Валидация перед созданием
@@ -136,7 +135,7 @@ namespace WMS.Services
         /// <returns>ValidationResult.SuccessResult()</returns>
         protected virtual ValidationResult ValidateBeforeInsert(TDto dto)
         {
-            ValidationResult validationResult = new ValidationResult();
+            // ValidationResult validationResult = new ValidationResult();
 
             if (dto == null)
             {
@@ -154,8 +153,8 @@ namespace WMS.Services
                 //    });
             }
 
-            // return ValidationResult.SuccessResult();
-            return validationResult;
+            return ValidationResult.SuccessResult(BusinessResult.OK);
+            // return validationResult;
         }
         /// <summary>
         /// Валидация перед изменением
@@ -180,7 +179,7 @@ namespace WMS.Services
 
             return new ValidationResult()
             {
-                // Success = true,
+                Success = true,
                 EntityCache = new Dictionary<string, ModelBase>() { ["entity"] = entity }
             };
         }

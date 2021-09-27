@@ -12,13 +12,13 @@ namespace WMS.Utils
         /// Кэш для сущностей
         /// </summary>
         public IDictionary<string, ModelBase> EntityCache { get; set; }
-        public static ValidationResult SuccessResult(IDictionary<string, ModelBase> entityCache = null)
+        public static ValidationResult SuccessResult(BusinessResult businessResult, IDictionary<string, ModelBase> entityCache = null)
         {
-            return new ValidationResult { /*Success = true,*/ EntityCache = entityCache};
+            return new ValidationResult { Success = true, BusinessResult = businessResult, EntityCache = entityCache};
         }
-        public static ValidationResult FailureResult(BusinessResult errorResult, string message = null)
+        public static ValidationResult FailureResult(BusinessResult businessResult, string message = null, string url = null)
         {
-            return new ValidationResult { ErrorResult = errorResult, Message = message };
+            return new ValidationResult { BusinessResult = businessResult, Message = message, Url = url };
 
         }
     }

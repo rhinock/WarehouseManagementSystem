@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using WMS.DTO;
 using WMS.Extensions;
 using WMS.Models;
@@ -24,19 +25,26 @@ namespace WMS.Services
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        protected virtual ValidationResult ValidateItemFields(ItemDto dto)
+        protected ValidationResult ValidateItemFields(ItemDto dto)
         {
             if (dto.Price < 0)
             {
-                return ReturnBadRequest("Цена должна быть положительным числом");
+                return BadResult("Цена должна быть положительным числом");
             }
 
             if (dto.Name.IsEmpty())
             {
-                return ReturnBadRequest("Имя товара не должно быть пустым");
+                return BadResult("Имя товара не должно быть пустым");
             }
 
-            return ValidationResult.SuccessResult();
+            bool isExist = _dbContext
+                    .Set<Item>()
+                    .Any(i => i.Name == dto.Name);
+
+            if (isExist)
+                return BadResult("Имя товара должно быть уникальным");
+
+            return ValidationResult.SuccessResult(BusinessResult.OK);
         }
         /// <inheritdoc />
         protected override ValidationResult ValidateBeforeInsert(ItemDto dto)
@@ -67,13 +75,8 @@ namespace WMS.Services
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        private ValidationResult ReturnBadRequest(string message)
+        private ValidationResult BadResult(string message)
         {
-            //return ValidationResult.FailureResult(
-            //    new JsonResult(message)
-            //    {
-            //        StatusCode = StatusCodes.Status400BadRequest
-            //    });
             return ValidationResult.FailureResult(BusinessResult.BadRequest, message);
         }
     }

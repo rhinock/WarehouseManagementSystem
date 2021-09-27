@@ -46,10 +46,17 @@ namespace WMS.Controllers
 
         public virtual IActionResult HandleRequest<TResult>(DataResult<TResult> dataResult)
         {
-            switch (dataResult.ErrorResult)
+            switch (dataResult.BusinessResult)
             {
-                //case ErrorResult.Created:
-                //    return Created(;
+                case BusinessResult.Created:
+                    if (dataResult.Message.IsEmpty())
+                    {
+                        return Created(dataResult.Url, dataResult.Data);
+                    }
+                    return new JsonResult(dataResult.Message ?? string.Empty)
+                    {
+                        StatusCode = StatusCodes.Status201Created
+                    };
 
                 case BusinessResult.NoContent:
                     if (dataResult.Message.IsEmpty())
@@ -60,6 +67,7 @@ namespace WMS.Controllers
                     {
                         StatusCode = StatusCodes.Status204NoContent
                     };
+
                 case BusinessResult.BadRequest:
                     if (dataResult.Message.IsEmpty())
                     {
@@ -69,6 +77,7 @@ namespace WMS.Controllers
                     {
                         StatusCode = StatusCodes.Status400BadRequest
                     };
+
                 case BusinessResult.NotFound:
                     if (dataResult.Message.IsEmpty())
                     {
@@ -78,6 +87,7 @@ namespace WMS.Controllers
                     {
                         StatusCode = StatusCodes.Status404NotFound
                     };
+
                 default:
                     return Ok(dataResult.Data);
             }

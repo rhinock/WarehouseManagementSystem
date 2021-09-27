@@ -30,8 +30,9 @@ namespace WMS.Controllers
         [HttpPost]
         public virtual IActionResult Insert(TDto dto)
         {
-            var a = this.HttpContext.Request.Path;
-            return HandleRequest(_dataService.Insert(dto));
+            var dataResult = _dataService.Insert(dto);
+            dataResult.Url = HttpContext.Request.Path;
+            return HandleRequest(dataResult);
         }
         /// <summary>
         /// Изменение склада или товара
