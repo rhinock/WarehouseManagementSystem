@@ -1,5 +1,8 @@
 ﻿namespace WMS.Utils
 {
+    /// <summary>
+    /// Статус коды для бизнес-логики
+    /// </summary>
     public enum BusinessResult
     {
         OK = 200,

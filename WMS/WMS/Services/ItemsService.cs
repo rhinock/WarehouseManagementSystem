@@ -24,7 +24,7 @@ namespace WMS.Services
         /// Валидация столбцов товара
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>ValidationResult</returns>
         protected ValidationResult ValidateItemFields(ItemDto dto)
         {
             if (dto.Price < 0)
@@ -74,7 +74,7 @@ namespace WMS.Services
         /// Кастомизированный вывод ошибки с сообщением
         /// </summary>
         /// <param name="message"></param>
-        /// <returns></returns>
+        /// <returns>ValidationResult</returns>
         private ValidationResult BadResult(string message)
         {
             return ValidationResult.FailureResult(BusinessResult.BadRequest, message);

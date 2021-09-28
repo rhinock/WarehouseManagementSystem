@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +6,6 @@ using System.Linq;
 using WMS.DTO;
 using WMS.Models;
 using WMS.Utils;
-
 
 namespace WMS.Services
 {
@@ -37,7 +34,7 @@ namespace WMS.Services
         /// <summary>
         /// Получить данные
         /// </summary>
-        /// <returns>DataResult<IEnumerable<T>>.SuccessResult(_dbContext.GetAll<T>(true).ToList())</returns>
+        /// <returns>DataResult<IEnumerable<T>></returns>
         public virtual DataResult<IEnumerable<T>> Get()
         {
             return DataResult<IEnumerable<T>>.SuccessResult(BusinessResult.OK, _dbContext.GetAll<T>(true).ToList());
@@ -46,7 +43,7 @@ namespace WMS.Services
         /// Получить данные по идентификатору
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>DataResult<T>.SuccessResult(entity)</returns>
+        /// <returns>DataResult<T></returns>
         public virtual DataResult<T> Get(long id)
         {
             T entity = _dbContext.GetAll<T>(true).FirstOrDefault(w => w.Id == id);
@@ -62,7 +59,7 @@ namespace WMS.Services
         /// Добавить данные
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns>DataResult<T>.SuccessResult(entity)</returns>
+        /// <returns>DataResult<T></returns>
         public virtual DataResult<T> Insert(TDto dto)
         {
             ValidationResult validationResult = ValidateBeforeInsert(dto);
@@ -83,7 +80,7 @@ namespace WMS.Services
         /// Обновить данные
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns>DataResult<T>.SuccessResult()</returns>
+        /// <returns>DataResult<T></returns>
         public virtual DataResult<T> Update(TDto dto)
         {
             ValidationResult validationResult = ValidateBeforeUpdate(dto);
@@ -106,7 +103,7 @@ namespace WMS.Services
         /// Удалить данные
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>DataResult<T>.SuccessResult()</returns>
+        /// <returns>DataResult<T></returns>
         public DataResult<T> Delete(long id)
         {
             WarehouseItem entity = _dbContext.Set<WarehouseItem>().FirstOrDefault(w => w.Id == id);
@@ -125,7 +122,7 @@ namespace WMS.Services
         /// Валидация перед созданием
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns>ValidationResult.SuccessResult()</returns>
+        /// <returns>ValidationResult</returns>
         protected virtual ValidationResult ValidateBeforeInsert(TDto dto)
         {
             if (dto == null)

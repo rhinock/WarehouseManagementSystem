@@ -4,7 +4,7 @@ using WMS.Models;
 namespace WMS.Utils
 {
     /// <summary>
-    /// Класс для валидации результата
+    /// Кастомизированный результат валидации данных
     /// </summary>
     public class ValidationResult : BaseResult
     {

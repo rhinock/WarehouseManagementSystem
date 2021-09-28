@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,8 +24,9 @@ namespace WMS.Services
         /// </summary>
         /// <param name="warehouseItemDto"></param>
         /// <param name="operationType"></param>
-        /// <returns></returns>
-        protected ValidationResult ValidateWarehouseItemFields(OperationType operationType, WarehouseItemDto warehouseItemDto)
+        /// <returns>ValidationResult</returns>
+        protected ValidationResult ValidateWarehouseItemFields(
+            OperationType operationType, WarehouseItemDto warehouseItemDto)
         {
             if (warehouseItemDto.Count < 0)
             {

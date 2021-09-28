@@ -1,7 +1,6 @@
 ﻿using WMS.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace WMS.Data
 {
     /// <summary>
