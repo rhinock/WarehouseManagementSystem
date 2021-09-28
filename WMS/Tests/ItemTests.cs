@@ -127,9 +127,9 @@ namespace Tests
         /// <param name="price"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData("Мелок", 15.00)]
-        [InlineData("Гуашь", 22.00)]
-        [InlineData("Акрил", 322.00)]
+        [InlineData("Мелок2", 15.00)]
+        [InlineData("Гуашь2", 22.00)]
+        [InlineData("Акрил2", 322.00)]
         public async Task UpdateItem(string name, decimal price)
         {
             var response = await CreateAsync(new ItemDto { Name = name.Reverse(), Price = price * 10 });

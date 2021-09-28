@@ -67,9 +67,9 @@ namespace Tests
         /// <param name="count"></param>
         /// <returns>True</returns>
         [Theory]
-        [InlineData(1, 1, 50)]
-        [InlineData(2, 2, 5000)]
-        [InlineData(3, 3, 500000)]
+        [InlineData(1, 2, 50)]
+        [InlineData(2, 3, 5000)]
+        [InlineData(3, 1, 500000)]
         public async Task CreateWarehouseItem(long warehouseId, long itemId, long count)
         {
             var response = await CreateAsync(new WarehouseItemDto { WarehouseId = warehouseId, ItemId = itemId, Count = count });
@@ -137,12 +137,13 @@ namespace Tests
         /// <param name="count"></param>
         /// <returns>True</returns>
         [Theory]
-        [InlineData(1, 1, 50)]
-        [InlineData(2, 2, 5000)]
-        [InlineData(3, 3, 500000)]
+        [InlineData(1, 2, 50)]
+        [InlineData(2, 3, 5000)]
+        [InlineData(3, 1, 500000)]
         public async Task UpdateWarehouseItem(long warehouseId, long itemId, long count)
         {
-            var response = await CreateAsync(new WarehouseItemDto { WarehouseId = warehouseId, ItemId = itemId, Count = count / 5 });
+            var response = await CreateAsync(new WarehouseItemDto 
+                { WarehouseId = warehouseId, ItemId = itemId, Count = count / 5 });
             Assert.NotNull(response);
             response.EnsureSuccessStatusCode();
 
@@ -232,7 +233,7 @@ namespace Tests
         [Fact]
         public async Task DeleteWarehouseItem()
         {
-            var response = await CreateAsync(new WarehouseItemDto { WarehouseId = 1, ItemId = 1, Count = 5 });
+            var response = await CreateAsync(new WarehouseItemDto { WarehouseId = 1, ItemId = 2, Count = 5 });
             Assert.NotNull(response);
             response.EnsureSuccessStatusCode();
 

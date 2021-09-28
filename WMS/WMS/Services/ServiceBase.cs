@@ -50,11 +50,9 @@ namespace WMS.Services
         public virtual DataResult<T> Get(long id)
         {
             T entity = _dbContext.GetAll<T>(true).FirstOrDefault(w => w.Id == id);
-            // DataResult<T> dataResult = new DataResult<T>();
-
+            
             if (entity == null)
             {
-                // return DataResult<T>.FailureResult(new StatusCodeResult(StatusCodes.Status404NotFound));
                 return DataResult<T>.FailureResult(BusinessResult.NotFound);
             }
 
@@ -68,13 +66,10 @@ namespace WMS.Services
         public virtual DataResult<T> Insert(TDto dto)
         {
             ValidationResult validationResult = ValidateBeforeInsert(dto);
-            // DataResult<T> dataResult = new DataResult<T>();
 
             if (!validationResult.Success)
             {
                 return DataResult<T>.FailureResult(validationResult.BusinessResult, validationResult.Message);
-                //dataResult.Success = validationResult.Success;
-                //dataResult.ErrorResult = validationResult.ErrorResult;
             }
 
             T entity = _mapper.Map<T>(dto);
@@ -83,8 +78,6 @@ namespace WMS.Services
             _dbContext.SaveChanges();
 
             return DataResult<T>.SuccessResult(BusinessResult.Created, entity);
-            //dataResult.Data = entity;
-            //return dataResult;
         }
         /// <summary>
         /// Обновить данные
@@ -135,26 +128,17 @@ namespace WMS.Services
         /// <returns>ValidationResult.SuccessResult()</returns>
         protected virtual ValidationResult ValidateBeforeInsert(TDto dto)
         {
-            // ValidationResult validationResult = new ValidationResult();
-
             if (dto == null)
             {
-                return ValidationResult.FailureResult(BusinessResult.BadRequest);
+                return ValidationResult.FailureResult(BusinessResult.BadRequest, "Объект не должен быть пустым");
             }
 
             if (dto.Id != default(long))
             {
                 return ValidationResult.FailureResult(BusinessResult.BadRequest, "Id не должен присутствовать в запросе");
-
-                //return ValidationResult.FailureResult(
-                //    new JsonResult("Id не должен присутствовать в запросе")
-                //    {
-                //        StatusCode = StatusCodes.Status400BadRequest
-                //    });
             }
 
             return ValidationResult.SuccessResult(BusinessResult.OK);
-            // return validationResult;
         }
         /// <summary>
         /// Валидация перед изменением
@@ -165,7 +149,6 @@ namespace WMS.Services
         {
             if (dto == null)
             {
-                // return ValidationResult.FailureResult(new StatusCodeResult(StatusCodes.Status400BadRequest));
                 return ValidationResult.FailureResult(BusinessResult.BadRequest);
             }
 
@@ -173,7 +156,6 @@ namespace WMS.Services
 
             if (entity == null)
             {
-                // return ValidationResult.FailureResult(new StatusCodeResult(StatusCodes.Status404NotFound));
                 return ValidationResult.FailureResult(BusinessResult.NotFound);
             }
 

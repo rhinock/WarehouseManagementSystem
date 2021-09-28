@@ -39,13 +39,13 @@ namespace WMS.Services
                 .FirstOrDefault(w => w.Id == warehouseItemDto.WarehouseId);
 
             if (warehouse == null)
-                return ValidationResult.FailureResult(BusinessResult.NotFound);
+                return ValidationResult.FailureResult(BusinessResult.NotFound, "Не указан идентификатор склада");
 
             Item item = _dbContext.Set<Item>()
                 .FirstOrDefault(i => i.Id == warehouseItemDto.ItemId);
 
             if (item == null)
-                return ValidationResult.FailureResult(BusinessResult.NotFound);
+                return ValidationResult.FailureResult(BusinessResult.NotFound, "Не указан идентификатор товара");
 
             WarehouseItem warehouseItem = null;
 
