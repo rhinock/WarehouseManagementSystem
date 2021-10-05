@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\WMS.DataAccess.csproj" />
+    <ProjectReference Include="..\WMS.DataAccess\WMS.DataAccess.csproj" />
     <ProjectReference Include="..\WMS\WMS.csproj" />
   </ItemGroup>
 
