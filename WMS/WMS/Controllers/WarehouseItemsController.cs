@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using WMS.DTO;
-using WMS.Models;
+using WMS.BusinessLogic.DTO;
+using WMS.DataAccess.Models;
 
 namespace WMS.Controllers
 {

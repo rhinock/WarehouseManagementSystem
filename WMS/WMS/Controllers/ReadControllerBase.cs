@@ -1,11 +1,11 @@
-﻿using WMS.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using WMS.Services;
 using Microsoft.Extensions.DependencyInjection;
-using WMS.Utils;
 using Microsoft.AspNetCore.Http;
-using WMS.Extensions;
+using WMS.DataAccess.Models;
+using WMS.BusinessLogic.Services;
+using WMS.BusinessLogic.Utils;
+using WMS.BusinessLogic.Extensions;
 
 namespace WMS.Controllers
 {

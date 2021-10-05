@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text;
 
-namespace Tests
+namespace WMS.Tests
 {
     /// <summary>
     /// Базовые интеграционные тесты

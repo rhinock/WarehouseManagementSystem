@@ -3,7 +3,7 @@ using Xunit;
 using WMS;
 using System.Threading.Tasks;
 
-namespace Tests
+namespace WMS.Tests
 {
     /// <summary>
     /// Базовые тесты

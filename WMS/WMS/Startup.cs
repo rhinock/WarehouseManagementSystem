@@ -1,14 +1,14 @@
-using WMS.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WMS.Services;
-using WMS.Models;
-using WMS.DTO;
-using WMS.Extensions;
+using Microsoft.EntityFrameworkCore;
+using WMS.DataAccess.Data;
+using WMS.BusinessLogic.Extensions;
+using WMS.BusinessLogic.Services;
+using WMS.DataAccess.Models;
+using WMS.BusinessLogic.DTO;
 
 namespace WMS
 {
@@ -28,9 +28,14 @@ namespace WMS
 
             // подключение к SQL Server
 
+            // services.AddDbContext<WmsDbContext>(options =>
+            //     options.UseSqlServer(Configuration.GetConnectionString("WmsDbContext")));
+            // services.AddScoped<DbContext, WmsDbContext>();
+
+            // connect to postgres
+
             services.AddDbContext<WmsDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("WmsDbContext")));
-            services.AddScoped<DbContext, WmsDbContext>();
+            options.UseNpgsql(Configuration.GetConnectionString("WmsDbContextPostgres")));
 
             // регистрация автомаппера
 

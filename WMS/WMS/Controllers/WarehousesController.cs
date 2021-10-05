@@ -1,5 +1,5 @@
-﻿using WMS.Models;
-using System;
+﻿using System;
+using WMS.DataAccess.Models;
 
 namespace WMS.Controllers
 {

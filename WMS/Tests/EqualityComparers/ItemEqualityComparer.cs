@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using WMS.Models;
+using WMS.DataAccess.Models;
 
-namespace Tests.EqualityComparers
+namespace WMS.Tests.EqualityComparers
 {
     /// <summary>
     /// Сравнение двух товаров

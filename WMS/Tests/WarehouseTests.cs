@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WMS;
-using WMS.Models;
 using Xunit;
 using Microsoft.AspNetCore.Http;
+using WMS.DataAccess.Models;
 
-namespace Tests
+namespace WMS.Tests
 {
     /// <summary>
     /// Тесты для склада

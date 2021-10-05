@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tests.EqualityComparers;
+using WMS.Tests.EqualityComparers;
 using WMS;
-using WMS.DTO;
-using WMS.Extensions;
-using WMS.Models;
+using WMS.BusinessLogic.DTO;
+using WMS.BusinessLogic.Extensions;
+using WMS.DataAccess.Models;
 using Xunit;
 
-namespace Tests
+namespace WMS.Tests
 {
     /// <summary>
     /// Тесты товаров

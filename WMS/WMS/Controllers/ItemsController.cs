@@ -1,6 +1,6 @@
-﻿using WMS.Models;
-using WMS.DTO;
-using System;
+﻿using System;
+using WMS.BusinessLogic.DTO;
+using WMS.DataAccess.Models;
 
 namespace WMS.Controllers
 {
