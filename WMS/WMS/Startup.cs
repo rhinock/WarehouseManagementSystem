@@ -9,6 +9,7 @@ using WMS.BusinessLogic.Extensions;
 using WMS.BusinessLogic.Services;
 using WMS.DataAccess.Models;
 using WMS.BusinessLogic.DTO;
+using WMS.BusinessLogic.Mappers;
 
 namespace WMS
 {
@@ -35,11 +36,13 @@ namespace WMS
             // connect to postgres
 
             services.AddDbContext<WmsDbContext>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("WmsDbContextPostgres")));
+                options.UseNpgsql(Configuration.GetConnectionString("WmsDbContextPostgres")));
+            services.AddScoped<DbContext, WmsDbContext>();
 
             // регистрация автомаппера
 
             services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(WmsProfile));
 
             // регистрация сервисов
 
