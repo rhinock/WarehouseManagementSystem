@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: postgres
+      POSTGRES_DB: WMS
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+  app:
+    image: wms:latest
+    build:
+      context: ./WMS
+    environment:
+      ConnectionStrings__WmsDbContextPostgres: "Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234"
+    ports:
+      - "8080:80"

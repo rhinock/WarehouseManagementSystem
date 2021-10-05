@@ -11,7 +11,7 @@ namespace WMS.DataAccess.Data
         public WmsDbContext(DbContextOptions<WmsDbContext> options)
             : base(options)
         {
-            // Database.EnsureCreated();
+            Database.EnsureCreated();
         }
         /// <summary>
         /// Таблица складов
