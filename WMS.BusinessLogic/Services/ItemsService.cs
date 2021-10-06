@@ -9,30 +9,22 @@ using WMS.DataAccess.Models;
 
 namespace WMS.BusinessLogic.Services
 {
-    /// <summary>
-    /// Сервис товаров
-    /// </summary>
     public class ItemsService : ServiceBase<Item, ItemDto>
     {
         public ItemsService(IServiceProvider serviceProvider, DbContext dbContext, IMapper mapper) : 
             base(serviceProvider, dbContext, mapper)
         {
         }
-        /// <summary>
-        /// Валидация столбцов товара
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns>ValidationResult</returns>
         protected ValidationResult ValidateItemFields(ItemDto dto)
         {
             if (dto.Price < 0)
             {
-                return BadResult("Цена должна быть положительным числом");
+                return BadResult("Price should be positive");
             }
 
             if (dto.Name.IsEmpty())
             {
-                return BadResult("Имя товара не должно быть пустым");
+                return BadResult("Name of the Item mustn't be empty");
             }
 
             bool isExist = _dbContext
@@ -40,11 +32,10 @@ namespace WMS.BusinessLogic.Services
                     .Any(i => i.Name == dto.Name);
 
             if (isExist)
-                return BadResult("Имя товара должно быть уникальным");
+                return BadResult("Name of the Item must be unique");
 
             return ValidationResult.SuccessResult(BusinessResult.OK);
         }
-        /// <inheritdoc />
         protected override ValidationResult ValidateBeforeInsert(ItemDto dto)
         {
             ValidationResult baseValidationResult = base.ValidateBeforeInsert(dto);
@@ -56,7 +47,6 @@ namespace WMS.BusinessLogic.Services
 
             return ValidateItemFields(dto);
         }
-        /// <inheritdoc />
         protected override ValidationResult ValidateBeforeUpdate(ItemDto dto)
         {
             ValidationResult baseValidationResult = base.ValidateBeforeUpdate(dto);
@@ -68,11 +58,7 @@ namespace WMS.BusinessLogic.Services
 
             return ValidateItemFields(dto);
         }
-        /// <summary>
-        /// Кастомизированный вывод ошибки с сообщением
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns>ValidationResult</returns>
+        
         private ValidationResult BadResult(string message)
         {
             return ValidationResult.FailureResult(BusinessResult.BadRequest, message);

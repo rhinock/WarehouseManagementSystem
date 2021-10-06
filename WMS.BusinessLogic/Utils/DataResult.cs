@@ -1,9 +1,5 @@
 ﻿namespace WMS.BusinessLogic.Utils
 {
-    /// <summary>
-    /// Кастомизированный результат обработки данных
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class DataResult<T> : BaseResult
     {
         public T Data { get; set; }

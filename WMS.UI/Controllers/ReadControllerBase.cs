@@ -10,7 +10,7 @@ using WMS.BusinessLogic.Extensions;
 namespace WMS.UI.Controllers
 {
     /// <summary>
-    /// Базовый контроллер для чтения данных
+    /// read data
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [Route("api/[controller]")]
@@ -25,7 +25,7 @@ namespace WMS.UI.Controllers
             _readService = _serviceProvider.GetService<IReadService<T>>();
         }
         /// <summary>
-        /// Получить весь список элементов
+        /// Get Warehouses, Items or WarehouseItems
         /// </summary>
         /// <returns>Ok(result.Data)</returns>
         [HttpGet]
@@ -34,7 +34,7 @@ namespace WMS.UI.Controllers
             return HandleRequest(_readService.Get());
         }
         /// <summary>
-        /// Получить список элементов по id
+        /// Get Warehouses, Items or WarehouseItems by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Ok(result.Data)</returns>

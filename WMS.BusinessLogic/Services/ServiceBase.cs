@@ -9,18 +9,10 @@ using WMS.DataAccess.Models;
 
 namespace WMS.BusinessLogic.Services
 {
-    /// <summary>
-    /// базовый сервис
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="TDto"></typeparam>
     public class ServiceBase<T, TDto> : IDataService<T, TDto>
         where T : ModelBase
         where TDto: IHaveId
     {
-        /// <summary>
-        /// IoC (Inversion of Control) -- инверсия контроля
-        /// </summary>
         protected readonly IServiceProvider _serviceProvider;
         protected readonly DbContext _dbContext;
         protected readonly IMapper _mapper;
@@ -31,19 +23,10 @@ namespace WMS.BusinessLogic.Services
             _dbContext = dbContext;
             _mapper = mapper;
         }
-        /// <summary>
-        /// Получить данные
-        /// </summary>
-        /// <returns>DataResult<IEnumerable<T>></returns>
         public virtual DataResult<IEnumerable<T>> Get()
         {
             return DataResult<IEnumerable<T>>.SuccessResult(BusinessResult.OK, _dbContext.GetAll<T>(true).ToList());
         }
-        /// <summary>
-        /// Получить данные по идентификатору
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>DataResult<T></returns>
         public virtual DataResult<T> Get(long id)
         {
             T entity = _dbContext.GetAll<T>(true).FirstOrDefault(w => w.Id == id);
@@ -55,11 +38,6 @@ namespace WMS.BusinessLogic.Services
 
             return DataResult<T>.SuccessResult(BusinessResult.OK, entity);
         }
-        /// <summary>
-        /// Добавить данные
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns>DataResult<T></returns>
         public virtual DataResult<T> Insert(TDto dto)
         {
             ValidationResult validationResult = ValidateBeforeInsert(dto);
@@ -76,11 +54,6 @@ namespace WMS.BusinessLogic.Services
 
             return DataResult<T>.SuccessResult(BusinessResult.Created, entity);
         }
-        /// <summary>
-        /// Обновить данные
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns>DataResult<T></returns>
         public virtual DataResult<T> Update(TDto dto)
         {
             ValidationResult validationResult = ValidateBeforeUpdate(dto);
@@ -99,11 +72,6 @@ namespace WMS.BusinessLogic.Services
 
             return DataResult<T>.SuccessResult(BusinessResult.NoContent);
         }
-        /// <summary>
-        /// Удалить данные
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>DataResult<T></returns>
         public DataResult<T> Delete(long id)
         {
             WarehouseItem entity = _dbContext.Set<WarehouseItem>().FirstOrDefault(w => w.Id == id);
@@ -118,30 +86,22 @@ namespace WMS.BusinessLogic.Services
 
             return DataResult<T>.SuccessResult(BusinessResult.OK);
         }
-        /// <summary>
-        /// Валидация перед созданием
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns>ValidationResult</returns>
         protected virtual ValidationResult ValidateBeforeInsert(TDto dto)
         {
             if (dto == null)
             {
-                return ValidationResult.FailureResult(BusinessResult.BadRequest, "Объект не должен быть пустым");
+                return ValidationResult.FailureResult
+                    (BusinessResult.BadRequest, "The object mustn't be empty");
             }
 
             if (dto.Id != default(long))
             {
-                return ValidationResult.FailureResult(BusinessResult.BadRequest, "Id не должен присутствовать в запросе");
+                return ValidationResult.FailureResult
+                    (BusinessResult.BadRequest, "Id mustn't be in body");
             }
 
             return ValidationResult.SuccessResult(BusinessResult.OK);
         }
-        /// <summary>
-        /// Валидация перед изменением
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns>ValidationResult</returns>
         protected virtual ValidationResult ValidateBeforeUpdate(TDto dto)
         {
             if (dto == null)

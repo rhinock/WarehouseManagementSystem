@@ -27,24 +27,18 @@ namespace WMS.UI
         {
             services.AddControllers();
 
-            // подключение к SQL Server
-
-            // services.AddDbContext<WmsDbContext>(options =>
-            //     options.UseSqlServer(Configuration.GetConnectionString("WmsDbContext")));
-            // services.AddScoped<DbContext, WmsDbContext>();
-
             // connect to postgres
 
             services.AddDbContext<WmsDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("WmsDbContextPostgres")));
             services.AddScoped<DbContext, WmsDbContext>();
 
-            // регистрация автомаппера
+            // automapper registration
 
             services.AddAutoMapper(typeof(Startup));
             services.AddAutoMapper(typeof(WmsProfile));
 
-            // регистрация сервисов
+            // services registration
 
             services.RegisterDataService<ServiceBase<Warehouse, WarehouseDto>, Warehouse, WarehouseDto>();
             services.RegisterDataService<WarehouseItemsService, WarehouseItem, WarehouseItemDto>();
@@ -67,7 +61,7 @@ namespace WMS.UI
 
             app.UseEndpoints(endpoints =>
             {
-                // определение маршрутов
+                // routes definition
                 endpoints.MapControllers();
             });
         }

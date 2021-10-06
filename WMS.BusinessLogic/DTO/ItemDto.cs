@@ -1,8 +1,5 @@
 ﻿namespace WMS.BusinessLogic.DTO
 {
-    /// <summary>
-    /// DTO (Data Tranfser Object) для Item (товар)</see>
-    /// </summary>
     public class ItemDto : IHaveId
     {
         /// <summary>

@@ -8,15 +8,13 @@ using WMS.UI;
 
 namespace WMS.Tests
 {
-    /// <summary>
-    /// Тесты для склада
-    /// </summary>
-    public class WarehouseTests : IntegrationTestBase
+public class WarehouseTests : IntegrationTestBase
     {
         public WarehouseTests(WebApplicationFactory<Startup> factory)
             : base(factory, "api/warehouses") { }
+        
         /// <summary>
-        /// Получить все склады
+        /// Get all Warehouses
         /// </summary>
         /// <returns>True</returns>
         [Fact]
@@ -31,7 +29,7 @@ namespace WMS.Tests
             Assert.True(warehouses.Count > 0);
         }
         /// <summary>
-        /// Получить склад по идентификатору
+        /// Get Warehouse by Id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
@@ -55,7 +53,7 @@ namespace WMS.Tests
             Assert.Equal(maximumItems, warehouse.MaximumItems);
         }
         /// <summary>
-        /// Поиск склада по некорректном идентификатору (не найдено)
+        /// Get Warehouse by incorrect Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>StatusCodes.Status404NotFound</returns>

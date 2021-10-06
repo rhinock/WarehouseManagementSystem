@@ -5,14 +5,14 @@ using WMS.DataAccess.Models;
 namespace WMS.BusinessLogic.Mappers
 {
     /// <summary>
-    /// Настройка маппинга
+    /// Automapper configuration
     /// </summary>
     public class WmsProfile : Profile
     {
         public WmsProfile()
         {
             CreateMap<ItemDto, Item>();
-            // CreateMap<WarehouseDto, Warehouse>(); // только чтение
+            // CreateMap<WarehouseDto, Warehouse>(); // only read, not necessary
             CreateMap<WarehouseItemDto, WarehouseItem>();
         }
     }

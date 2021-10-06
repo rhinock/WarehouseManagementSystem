@@ -12,16 +12,13 @@ using Xunit;
 
 namespace WMS.Tests
 {
-    /// <summary>
-    /// Тесты товаров
-    /// </summary>
     public class ItemTests : IntegrationTestBase
     {
         public ItemTests(WebApplicationFactory<Startup> factory)
             : base(factory, "api/items") { }
 
         /// <summary>
-        /// Получить все товары
+        /// Get all Items
         /// </summary>
         /// <returns>True</returns>
         [Fact]
@@ -36,7 +33,7 @@ namespace WMS.Tests
             Assert.True(items.Count > 0);
         }
         /// <summary>
-        /// Получить товар по идентификатору
+        /// Get Item by Id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
@@ -60,7 +57,7 @@ namespace WMS.Tests
             Assert.Equal(price, item.Price);
         }
         /// <summary>
-        /// Создать товар
+        /// Create an Item
         /// </summary>
         /// <param name="name"></param>
         /// <param name="price"></param>
@@ -90,7 +87,7 @@ namespace WMS.Tests
             Assert.True(itemEqualityComparer.Equals(item, itemCheck));
         }
         /// <summary>
-        /// Создать товар с идентификатором (запрещено)
+        /// Create an Item with Id (prohibited)
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
@@ -106,7 +103,7 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
         }
         /// <summary>
-        /// Создать товар с некорректной ценой (запрещено)
+        /// Create an item with incorrect price (prohibited)
         /// </summary>
         /// <param name="name"></param>
         /// <param name="price"></param>
@@ -121,11 +118,11 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
         }
         /// <summary>
-        /// Изменить товар
+        /// Edit an item
         /// </summary>
         /// <param name="name"></param>
         /// <param name="price"></param>
-        /// <returns></returns>
+        /// <returns>True</returns>
         [Theory]
         [InlineData("crayon2", 15.00)]
         [InlineData("gouache2", 22.00)]
@@ -155,7 +152,7 @@ namespace WMS.Tests
             Assert.Equal(price, itemUpdated.Price);
         }
         /// <summary>
-        /// Изменение товара с некорректным идентификатором (не найдено)
+        /// Edit an item with incorrect Id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
@@ -171,7 +168,7 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status404NotFound, (int)response.StatusCode);
         }
         /// <summary>
-        /// Изменение товара с некорректными данными (запрещено)
+        /// Edit an item with incorrect data (prohibited)
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>

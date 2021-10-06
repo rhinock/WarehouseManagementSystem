@@ -8,7 +8,7 @@ namespace WMS.BusinessLogic.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Регистрация сервиса как IReadService и IDataService
+        /// Register service as IReadService and IDataService
         /// </summary>
         /// <typeparam name="TService"></typeparam>
         /// <typeparam name="TEntity"></typeparam>

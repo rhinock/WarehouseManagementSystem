@@ -3,9 +3,6 @@ using WMS.DataAccess.Models;
 
 namespace WMS.DataAccess.Data
 {
-    /// <summary>
-    /// Контекст базы данных
-    /// </summary>
     public class WmsDbContext : DbContext
     {
         public WmsDbContext(DbContextOptions<WmsDbContext> options)
@@ -13,25 +10,16 @@ namespace WMS.DataAccess.Data
         {
             Database.EnsureCreated();
         }
-        /// <summary>
-        /// Таблица складов
-        /// </summary>
         public DbSet<Warehouse> Warehouses { get; set; }
-        /// <summary>
-        /// Таблица товаров
-        /// </summary>
         public DbSet<Item> Items { get; set; }
-        /// <summary>
-        /// Таблица содержания товаров на складе
-        /// </summary>
         public DbSet<WarehouseItem> WarehouseItems { get; set; }
         /// <summary>
-        /// Начальные данные при создании модели
+        /// initial data
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Склады
+            // Warehouses
 
             modelBuilder.Entity<Warehouse>().Property(w => w.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Warehouse>().HasIndex(w => w.Name).IsUnique();
@@ -45,7 +33,7 @@ namespace WMS.DataAccess.Data
 
             modelBuilder.Entity<Warehouse>().HasData(warehouses);
 
-            // Товары
+            // Items
 
             modelBuilder.Entity<Item>().Property(i => i.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Item>().HasIndex(i => i.Name).IsUnique();
@@ -58,10 +46,12 @@ namespace WMS.DataAccess.Data
 
             modelBuilder.Entity<Item>().HasData(items);
 
-            // Товары на складе
+            // WarehouseItems
 
             modelBuilder.Entity<WarehouseItem>().Property(wi => wi.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<WarehouseItem>().HasIndex(wi => new { wi.WarehouseId, wi.ItemId } ).IsUnique();
+            modelBuilder.Entity<WarehouseItem>()
+                .HasIndex(wi => new { wi.WarehouseId, wi.ItemId } )
+                .IsUnique();
 
             WarehouseItem[] warehouseItems = new WarehouseItem[] {
                 new WarehouseItem

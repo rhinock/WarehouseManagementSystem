@@ -5,15 +5,12 @@ using WMS.DataAccess.Models;
 
 namespace WMS.UI.Controllers
 {
-    /// <summary>
-    /// Контроллер для содержания товаров на складе
-    /// </summary>
     public class WarehouseItemsController : DataControllerBase<WarehouseItem, WarehouseItemDto>
     {
         public WarehouseItemsController(IServiceProvider serviceProvider) : base(serviceProvider) {}
 
         /// <summary>
-        /// Удаление товара со склада
+        /// Delete WarehouseItem by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>NoContent()</returns>

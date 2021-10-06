@@ -8,9 +8,6 @@ using System.Text;
 
 namespace WMS.Tests
 {
-    /// <summary>
-    /// Базовые интеграционные тесты
-    /// </summary>
     public class IntegrationTestBase : IClassFixture<WebApplicationFactory<Startup>>
     {
         protected readonly HttpClient _httpClient;
@@ -31,12 +28,14 @@ namespace WMS.Tests
         protected async Task<HttpResponseMessage> CreateAsync<T>(T dto)
         {
             var json = JsonSerializer.Serialize(dto);
-            return await _httpClient.PostAsync(_url, new StringContent(json, Encoding.UTF8, "application/json"));
+            return await _httpClient.PostAsync
+                (_url, new StringContent(json, Encoding.UTF8, "application/json"));
         }
         protected async Task<HttpResponseMessage> UpdateAsync<T>(T dto)
         {
             var json = JsonSerializer.Serialize(dto);
-            return await _httpClient.PutAsync(_url, new StringContent(json, Encoding.UTF8, "application/json"));
+            return await _httpClient.PutAsync
+                (_url, new StringContent(json, Encoding.UTF8, "application/json"));
         }
         protected async Task<HttpResponseMessage> DeleteAsync(long id)
         {
@@ -46,7 +45,8 @@ namespace WMS.Tests
             where T : class
         {
             var content = await httpResponseMessage.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<T>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return JsonSerializer.Deserialize<T>
+                (content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
     }
 }

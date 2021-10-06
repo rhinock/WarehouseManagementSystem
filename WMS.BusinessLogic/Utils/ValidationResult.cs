@@ -3,14 +3,8 @@ using WMS.DataAccess.Models;
 
 namespace WMS.BusinessLogic.Utils
 {
-    /// <summary>
-    /// Кастомизированный результат валидации данных
-    /// </summary>
     public class ValidationResult : BaseResult
     {
-        /// <summary>
-        /// Кэш для сущностей
-        /// </summary>
         public IDictionary<string, ModelBase> EntityCache { get; set; }
         public static ValidationResult SuccessResult(BusinessResult businessResult, IDictionary<string, ModelBase> entityCache = null)
         {

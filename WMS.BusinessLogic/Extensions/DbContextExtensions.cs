@@ -5,9 +5,6 @@ using WMS.DataAccess.Models;
 
 namespace WMS.BusinessLogic.Utils
 {
-    /// <summary>
-    /// Класс расширения DbContext
-    /// </summary>
     public static class DbContextExtensions
     {
         public static IQueryable<T> GetAll<T>(this DbContext context, bool eager = false) where T : ModelBase

@@ -2,13 +2,10 @@
 
 namespace WMS.BusinessLogic.Extensions
 {
-    /// <summary>
-    /// Метод расширения для строк
-    /// </summary>
     public static class StringExtensions
     {
         /// <summary>
-        /// Проверка на пустые строки, отступы и переводы строки
+        /// Check for empty strings, tabs and new lines
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
@@ -19,11 +16,6 @@ namespace WMS.BusinessLogic.Extensions
 
             return string.IsNullOrEmpty(str.Replace("\n", "").Replace("\t", "").Trim());
         }
-        /// <summary>
-        /// Реверс строки
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
         public static string Reverse(this string str)
         {
             var charArray = str.ToCharArray();

@@ -10,41 +10,34 @@ using WMS.DataAccess.Models;
 
 namespace WMS.BusinessLogic.Services
 {
-    /// <summary>
-    /// Сервис для товаров на складе
-    /// </summary>
     public class WarehouseItemsService : ServiceBase<WarehouseItem, WarehouseItemDto>
     {
         public WarehouseItemsService(IServiceProvider serviceProvider, DbContext dbContext, IMapper mapper)
             : base(serviceProvider, dbContext, mapper)
         {
         }
-        /// <summary>
-        /// Валидация столбцов товара
-        /// </summary>
-        /// <param name="warehouseItemDto"></param>
-        /// <param name="operationType"></param>
-        /// <returns>ValidationResult</returns>
         protected ValidationResult ValidateWarehouseItemFields(
             OperationType operationType, WarehouseItemDto warehouseItemDto)
         {
             if (warehouseItemDto.Count < 0)
             {
                 return ValidationResult.FailureResult
-                    (BusinessResult.BadRequest, "Количество товара должно быть положительным числом");
+                    (BusinessResult.BadRequest, "Count should be positive");
             }
 
             Warehouse warehouse = _dbContext.Set<Warehouse>()
                 .FirstOrDefault(w => w.Id == warehouseItemDto.WarehouseId);
 
             if (warehouse == null)
-                return ValidationResult.FailureResult(BusinessResult.NotFound, "Не указан идентификатор склада");
+                return ValidationResult.FailureResult
+                    (BusinessResult.NotFound, "WarehouseId wasn't provided");
 
             Item item = _dbContext.Set<Item>()
                 .FirstOrDefault(i => i.Id == warehouseItemDto.ItemId);
 
             if (item == null)
-                return ValidationResult.FailureResult(BusinessResult.NotFound, "Не указан идентификатор товара");
+                return ValidationResult.FailureResult
+                    (BusinessResult.NotFound, "ItemId wasn't provided");
 
             WarehouseItem warehouseItem = null;
 
@@ -61,7 +54,7 @@ namespace WMS.BusinessLogic.Services
                         return ValidationResult.FailureResult
                         (
                             BusinessResult.BadRequest,
-                            $"товар: {item.Name} уже существует на складе: {warehouse.Name}"
+                            $"Item: {item.Name} already exists in warehouse: {warehouse.Name}"
                         );
                     }
 
@@ -108,10 +101,10 @@ namespace WMS.BusinessLogic.Services
                     return ValidationResult.FailureResult
                         (
                             BusinessResult.BadRequest,
-                            $"товар: {item.Name}, количество: {warehouseItemDto.Count}\\n" +
-                            $"склад: {warehouse.Name}, максимальное количество товаров: {warehouse.MaximumItems}\\n" +
-                            $"текущая заполненность склада: {warehouseItemsCurrentCount}\\n" +
-                            $"добавляемое количество товара не должно превышать максимальное количество товаров"
+                            $"item: {item.Name}, count: {warehouseItemDto.Count}\\n" +
+                            $"warehouse: {warehouse.Name}, maximum items: { warehouse.MaximumItems}\\n" +
+                            $"current count of warehouse: {warehouseItemsCurrentCount}\\n" +
+                            $"the added count of items must not exceed the maximum count of items"
                         );
                 }
             }
@@ -122,7 +115,6 @@ namespace WMS.BusinessLogic.Services
                 EntityCache = new Dictionary<string, ModelBase>() { ["entity"] = warehouseItem }
             };
         }
-        /// <inheritdoc />
         protected override ValidationResult ValidateBeforeInsert(WarehouseItemDto dto)
         {
             ValidationResult baseValidationResult = base.ValidateBeforeInsert(dto);
@@ -134,7 +126,6 @@ namespace WMS.BusinessLogic.Services
 
             return ValidateWarehouseItemFields(OperationType.Insert, dto);
         }
-        /// <inheritdoc />
         protected override ValidationResult ValidateBeforeUpdate(WarehouseItemDto dto)
         {
             ValidationResult baseValidationResult = base.ValidateBeforeUpdate(dto);

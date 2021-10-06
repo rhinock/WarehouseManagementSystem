@@ -1,8 +1,5 @@
 ﻿namespace WMS.BusinessLogic.Utils
 {
-    /// <summary>
-    /// Базовый результат обработки данных
-    /// </summary>
     public class BaseResult
     {
         public bool Success { get; set; }

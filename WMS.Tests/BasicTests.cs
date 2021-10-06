@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 
 namespace WMS.Tests
 {
-    /// <summary>
-    /// Базовые тесты
-    /// </summary>
     public class BasicTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;

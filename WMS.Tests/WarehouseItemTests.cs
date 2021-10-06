@@ -10,16 +10,13 @@ using Xunit;
 
 namespace WMS.Tests
 {
-    /// <summary>
-    /// Тесты товаров из складов
-    /// </summary>
     public class WarehouseItemTests : IntegrationTestBase
     {
         public WarehouseItemTests(WebApplicationFactory<Startup> factory)
             : base(factory, "api/warehouseitems") { }
         
         /// <summary>
-        /// Получить все товары из складов
+        /// Get all WarehouseItems
         /// </summary>
         /// <returns>True</returns>
         [Fact]
@@ -34,7 +31,7 @@ namespace WMS.Tests
             Assert.True(items.Count > 0);
         }
         /// <summary>
-        /// Получить товары из складов по идентификатору
+        /// Get WarehouseItem by Id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="warehouseId"></param>
@@ -60,7 +57,7 @@ namespace WMS.Tests
             Assert.Equal(count, warehouseItem.Count);
         }
         /// <summary>
-        /// Создать товар на складе
+        /// Create a WarehouseItem
         /// </summary>
         /// <param name="warehouseId"></param>
         /// <param name="itemId"></param>
@@ -97,7 +94,7 @@ namespace WMS.Tests
             }
         }
         /// <summary>
-        /// Создание товара на складе с использованием идентификатора (запрещено)
+        /// Create a WarehouseItem with Id (prohibited)
         /// </summary>
         /// <param name="id"></param>
         /// <param name="warehouseId"></param>
@@ -114,7 +111,7 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
         }
         /// <summary>
-        /// Создать товар на складе с отрицательным количеством (запрещено)
+        ///  Create a WarehouseItem with negative Count (prohibited)
         /// </summary>
         /// <param name="warehouseId"></param>
         /// <param name="itemId"></param>
@@ -130,7 +127,7 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
         }
         /// <summary>
-        /// Изменить товар на складе
+        /// Edit WarehouseItem
         /// </summary>
         /// <param name="warehouseId"></param>
         /// <param name="itemId"></param>
@@ -175,7 +172,7 @@ namespace WMS.Tests
             }
         }
         /// <summary>
-        /// Изменить товар на складе с использованием некорректного идентификатора (не найдено)
+        /// Edit WarehouseItem with incorrect Id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="warehouseId"></param>
@@ -193,7 +190,7 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status404NotFound, (int)response.StatusCode);
         }
         /// <summary>
-        /// Изменить товар на складе с использованием некорректных идентификаторов (не найдено)
+        /// Edit WarehouseItem with incorrect WarehouseId or ItemId
         /// </summary>
         /// <param name="id"></param>
         /// <param name="warehouseId"></param>
@@ -201,8 +198,8 @@ namespace WMS.Tests
         /// <param name="count"></param>
         /// <returns>StatusCodes.Status404NotFound</returns>
         [Theory]
-        [InlineData(1, -1, 1, 50)] // некорректный warehouseId
-        [InlineData(2, 2, -2, 5000)] // некорректный itemId
+        [InlineData(1, -1, 1, 50)] // WarehouseId
+        [InlineData(2, 2, -2, 5000)] // ItemId
         public async Task UpdateWarehouseItemWithIncorrectIds(long id, long warehouseId, long itemId, long count)
         {
             var response = await UpdateAsync(new WarehouseItemDto
@@ -210,7 +207,7 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status404NotFound, (int)response.StatusCode);
         }
         /// <summary>
-        /// Изменить товар на складе с использованием некорректных данных (запрещено)
+        /// Edit WarehouseId with incorrect data (prohibited)
         /// </summary>
         /// <param name="id"></param>
         /// <param name="warehouseId"></param>
@@ -218,8 +215,8 @@ namespace WMS.Tests
         /// <param name="count"></param>
         /// <returns>StatusCodes.Status400BadRequest</returns>
         [Theory]
-        [InlineData(3, 3, 3, -500000)] // некорретный count < 0
-        [InlineData(1, 1, 1, 101)] // некорректный count > warehouse.MaximumItems
+        [InlineData(3, 3, 3, -500000)] // count < 0
+        [InlineData(1, 1, 1, 101)] // count > warehouse.MaximumItems
         public async Task UpdateWarehouseItemWithIncorrectData(long id, long warehouseId, long itemId, long count)
         {
             var response = await UpdateAsync(new WarehouseItemDto
@@ -227,7 +224,7 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
         }
         /// <summary>
-        /// Удалить товар со склада
+        /// Delete WarehouseItem
         /// </summary>
         /// <returns>True</returns>
         [Fact]
@@ -248,7 +245,7 @@ namespace WMS.Tests
             Assert.Equal(StatusCodes.Status404NotFound, (int)response.StatusCode);
         }
         /// <summary>
-        /// Удалить товар со склада с некорректным идентификатором (не найдено)
+        /// Delete WarehouseItem with incorrect Id
         /// </summary>
         /// <returns>StatusCodes.Status404NotFound</returns>
         [Fact]

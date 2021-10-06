@@ -8,7 +8,7 @@ using WMS.DataAccess.Models;
 namespace WMS.UI.Controllers
 {
     /// <summary>
-    /// Базовый контроллер для записи и валидации данных
+    /// write and validate data
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TDto"></typeparam>
@@ -23,7 +23,7 @@ namespace WMS.UI.Controllers
             _dataService = serviceProvider.Get<IDataService<T, TDto>>();
         }
         /// <summary>
-        /// Создание склада или товара
+        /// Create an Item or Warehouse
         /// </summary>
         /// <param name="dto"></param>
         /// <returns>Ok(result.Data)</returns>
@@ -35,7 +35,7 @@ namespace WMS.UI.Controllers
             return HandleRequest(dataResult);
         }
         /// <summary>
-        /// Изменение склада или товара
+        /// Update an Item or Warehouse
         /// </summary>
         /// <param name="dto"></param>
         /// <returns>NoContent()</returns>

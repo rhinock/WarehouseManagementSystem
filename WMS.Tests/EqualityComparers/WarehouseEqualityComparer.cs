@@ -4,9 +4,6 @@ using WMS.DataAccess.Models;
 
 namespace WMS.Tests.EqualityComparers
 {
-    /// <summary>
-    /// Сравнение складов
-    /// </summary>
     class WarehouseEqualityComparer : IEqualityComparer<Warehouse>
     {
         public bool Equals([AllowNull] Warehouse x, [AllowNull] Warehouse y)
