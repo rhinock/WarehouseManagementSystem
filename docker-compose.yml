@@ -11,7 +11,7 @@ services:
   app:
     image: wms:latest
     build:
-      context: ./WMS
+      context: ./WMS.UI
     environment:
       ConnectionStrings__WmsDbContextPostgres: "Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234"
     ports:
