@@ -2,7 +2,7 @@
 
 The system provides next functionality:
 - view list of warehouses, items and warehouse items
-- create a new item with particular price
+- add or edit an item with particular price
 - add, edit or delete an item to/from warehouse with particular amount
 
 Note. Warehouses, Items and WarehouseItems -- are different tables.
