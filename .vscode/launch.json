@@ -9,9 +9,9 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/WMS/WMS/bin/Debug/netcoreapp3.1/WMS.dll",
+      "program": "${workspaceFolder}/WMS.UI/bin/Debug/netcoreapp3.1/WMS.UI.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/WMS",
+      "cwd": "${workspaceFolder}/WMS.UI",
       "stopAtEntry": false,
       "serverReadyAction": {
         "action": "openExternally",
@@ -19,11 +19,7 @@
       },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      // "sourceFileMap": {
-      //   "/Views": "${workspaceFolder}/Views"
-      // }
+      }
     }
-
   ]
 }

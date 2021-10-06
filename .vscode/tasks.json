@@ -15,7 +15,7 @@
         "/consoleloggerparameters:NoSummary"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/WMS"
+        "cwd": "${workspaceFolder}/WMS.UI"
       },
       "group": "build",
       "presentation": {
