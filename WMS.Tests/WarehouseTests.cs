@@ -38,9 +38,9 @@ namespace WMS.Tests
         /// <param name="maximumItems"></param>
         /// <returns>True</returns>
         [Theory]
-        [InlineData(1, "Склад миниатюрный", 100)]
-        [InlineData(2, "Склад приличный", 10000)]
-        [InlineData(3, "Склад здоровенный", 1000000)]
+        [InlineData(1, "miniature", 100)]
+        [InlineData(2, "decent", 10000)]
+        [InlineData(3, "hefty", 1000000)]
         public async Task GetWarehouseById(long id, string name, long maximumItems)
         {
             var response = await GetAsync(id);

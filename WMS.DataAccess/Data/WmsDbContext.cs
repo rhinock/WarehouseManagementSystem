@@ -38,9 +38,9 @@ namespace WMS.DataAccess.Data
 
             Warehouse[] warehouses = new Warehouse[]
             {
-                new Warehouse { Id = 1, Name = "Склад миниатюрный", MaximumItems = 100 },
-                new Warehouse { Id = 2, Name = "Склад приличный", MaximumItems = 10000 },
-                new Warehouse { Id = 3, Name = "Склад здоровенный", MaximumItems = 1000000 }
+                new Warehouse { Id = 1, Name = "miniature", MaximumItems = 100 },
+                new Warehouse { Id = 2, Name = "decent", MaximumItems = 10000 },
+                new Warehouse { Id = 3, Name = "hefty", MaximumItems = 1000000 }
             };
 
             modelBuilder.Entity<Warehouse>().HasData(warehouses);
@@ -51,9 +51,9 @@ namespace WMS.DataAccess.Data
             modelBuilder.Entity<Item>().HasIndex(i => i.Name).IsUnique();
 
             Item[] items = new Item[] {
-                new Item { Id = 1, Name = "Карандаш", Price = 10.00m },
-                new Item { Id = 2, Name = "Ручка", Price = 20.00m },
-                new Item { Id = 3, Name = "Фломастер", Price = 30.00m }
+                new Item { Id = 1, Name = "pencil", Price = 10.00m },
+                new Item { Id = 2, Name = "pen", Price = 20.00m },
+                new Item { Id = 3, Name = "felt-tip pen", Price = 30.00m }
                 };
 
             modelBuilder.Entity<Item>().HasData(items);

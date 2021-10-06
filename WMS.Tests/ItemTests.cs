@@ -43,9 +43,9 @@ namespace WMS.Tests
         /// <param name="price"></param>
         /// <returns>True</returns>
         [Theory]
-        [InlineData(1, "Карандаш", 10.00)]
-        [InlineData(2, "Ручка", 20.00)]
-        [InlineData(3, "Фломастер", 30.00)]
+        [InlineData(1, "pencil", 10.00)]
+        [InlineData(2, "pen", 20.00)]
+        [InlineData(3, "felt-tip pen", 30.00)]
         public async Task GetItemById(long id, string name, decimal price)
         {
             var response = await GetAsync(id);
@@ -66,9 +66,9 @@ namespace WMS.Tests
         /// <param name="price"></param>
         /// <returns>True</returns>
         [Theory]
-        [InlineData("Мелок", 15.00)]
-        [InlineData("Гуашь", 22.00)]
-        [InlineData("Акрил", 322.00)]
+        [InlineData("crayon", 15.00)]
+        [InlineData("gouache", 22.00)]
+        [InlineData("acrylic", 322.00)]
         public async Task CreateItem(string name, decimal price)
         {
             var response = await CreateAsync(new ItemDto { Name = name, Price = price });
@@ -97,9 +97,9 @@ namespace WMS.Tests
         /// <param name="price"></param>
         /// <returns>StatusCodes.Status400BadRequest</returns>
         [Theory]
-        [InlineData(-1, "Мелок", 15.00)]
-        [InlineData(22, "Гуашь", 22.00)]
-        [InlineData(4, "Акрил", 322.00)]
+        [InlineData(-1, "crayon", 15.00)]
+        [InlineData(22, "gouache", 22.00)]
+        [InlineData(4, "acrylic", 322.00)]
         public async Task CreateItemWithId(long id, string name, decimal price)
         {
             var response = await CreateAsync(new ItemDto { Id = id, Name = name, Price = price });
@@ -112,9 +112,9 @@ namespace WMS.Tests
         /// <param name="price"></param>
         /// <returns>Status400BadRequest</returns>
         [Theory]
-        [InlineData("Мелок", -15.00)]
-        [InlineData("Гуашь", -22.00)]
-        [InlineData("Акрил", -1.00)]
+        [InlineData("crayon", -15.00)]
+        [InlineData("gouache", -22.00)]
+        [InlineData("acrylic", -1.00)]
         public async Task CreateItemWithNegativePrice(string name, decimal price)
         {
             var response = await CreateAsync(new ItemDto { Name = name, Price = price });
@@ -127,9 +127,9 @@ namespace WMS.Tests
         /// <param name="price"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData("Мелок2", 15.00)]
-        [InlineData("Гуашь2", 22.00)]
-        [InlineData("Акрил2", 322.00)]
+        [InlineData("crayon2", 15.00)]
+        [InlineData("gouache2", 22.00)]
+        [InlineData("acrylic2", 322.00)]
         public async Task UpdateItem(string name, decimal price)
         {
             var response = await CreateAsync(new ItemDto { Name = name.Reverse(), Price = price * 10 });
@@ -162,9 +162,9 @@ namespace WMS.Tests
         /// <param name="price"></param>
         /// <returns>StatusCodes.Status404NotFound</returns>
         [Theory]
-        [InlineData(0, "Мелок", 15.00)] // непередача Id
-        [InlineData(-5, "Гуашь", 22.00)] // передача несуществующего Id
-        [InlineData(long.MaxValue, "Акрил", 322.00)] // передача несуществующего Id
+        [InlineData(0, "crayon", 15.00)] // непередача Id
+        [InlineData(-5, "gouache", 22.00)] // передача несуществующего Id
+        [InlineData(long.MaxValue, "acrylic", 322.00)] // передача несуществующего Id
         public async Task UpdateItemWithIncorrectId(long id, string name, decimal price)
         {
             var response = await UpdateAsync(new ItemDto { Id = id, Name = name, Price = price });
@@ -181,7 +181,7 @@ namespace WMS.Tests
         [InlineData(1, null, 10.00)]
         [InlineData(2, "\t", 20.00)]
         [InlineData(3, "", 30.00)]
-        [InlineData(1, "Карандаш", -10.00)]
+        [InlineData(1, "pencil", -10.00)]
         public async Task UpdateItemWithIncorrectData(long id, string name, decimal price)
         {
             var response = await UpdateAsync(new ItemDto { Id = id, Name = name, Price = price });

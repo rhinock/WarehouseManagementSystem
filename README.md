@@ -1,44 +1,39 @@
 # WarehouseManagementSystem
 
-Система имеет список складов, на которой можно:
-- добавить товар 
-- удалить товар 
-- изменить количество товаров 
- 
-Склады, товар и содержание товара на складе -- разные таблицы.
+The system provides next functionality:
+- view list of warehouses, items and warehouse items
+- create a new item with particular price
+- add, edit or delete an item to/from warehouse with particular amount
 
-Требования:
-- Пользователь может:
-  - Просматривать список складов
-  - Работать с ассортиментом товаров (добавлять, изменять)
-  - Добавлять, удалять товары на складе или менять количество товара на складе.
-- Систему реализовывать на .NET Core + EF Core, в качестве БД можно любую
-- Реализовать только серверную часть (контроллеры WebAPI)
-- Фронт часть реализовывать не нужно
-- Покрыть проект интеграционными (поднимать webhost) тестами (xUnit)
-- Особое внимание уделить умению использовать ООП и принципы SOLID
+Note. Warehouses, Items and WarehouseItems -- are different tables.
 
-Диаграмма:
+Requirements:
+- .NET Core
+- EF Core
+- Any DB (currently PostgreSQL)
+- only server side (WebAPI controllers)
+- integration tests (webhost, xUnit)
+- OOP and SOLID principles
 
 ![](Diagram.png)
 
-Начальные данные
+Initial Data
 
 - Items
 
 | Id | Name | Price |
 |:--:|:----:|:-----:|
-| 1 | Карандаш | 10.00
-| 2 | Ручка | 20.00
-| 3 | Фломастер | 30.00
+| 1 | pencil | 10.00
+| 2 | pen | 20.00
+| 3 | felt-tip pen | 30.00
 
 - Warehouses
 
 | Id | Name | MaximumItems |
 |:--:|:----:|:------------:|
-| 1 | Склад миниатюрный | 100
-| 2 | Склад приличный | 10000
-| 3 | Склад здоровенный | 1000000
+| 1 | miniature | 100
+| 2 | пїЅпїЅпїЅпїЅпїЅ  | 10000
+| 3 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ | 1000000
 
 - WarehouseItems
 

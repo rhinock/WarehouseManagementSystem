@@ -67,9 +67,9 @@ namespace WMS.DataAccess.Migrations
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1L, "Карандаш", 10.00m },
-                    { 2L, "Ручка", 20.00m },
-                    { 3L, "Фломастер", 30.00m }
+                    { 1L, "pencil", 10.00m },
+                    { 2L, "pen", 20.00m },
+                    { 3L, "felt-tip pen", 30.00m }
                 });
 
             migrationBuilder.InsertData(
@@ -77,9 +77,9 @@ namespace WMS.DataAccess.Migrations
                 columns: new[] { "Id", "MaximumItems", "Name" },
                 values: new object[,]
                 {
-                    { 1L, 100L, "Склад миниатюрный" },
-                    { 2L, 10000L, "Склад приличный" },
-                    { 3L, 1000000L, "Склад здоровенный" }
+                    { 1L, 100L, "miniature" },
+                    { 2L, 10000L, "decent" },
+                    { 3L, 1000000L, "hefty" }
                 });
 
             migrationBuilder.InsertData(

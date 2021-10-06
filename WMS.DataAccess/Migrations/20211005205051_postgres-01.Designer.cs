@@ -44,19 +44,19 @@ namespace WMS.DataAccess.Migrations
                         new
                         {
                             Id = 1L,
-                            Name = "Карандаш",
+                            Name = "pencil",
                             Price = 10.00m
                         },
                         new
                         {
                             Id = 2L,
-                            Name = "Ручка",
+                            Name = "pen",
                             Price = 20.00m
                         },
                         new
                         {
                             Id = 3L,
-                            Name = "Фломастер",
+                            Name = "felt-tip pen",
                             Price = 30.00m
                         });
                 });
@@ -86,19 +86,19 @@ namespace WMS.DataAccess.Migrations
                         {
                             Id = 1L,
                             MaximumItems = 100L,
-                            Name = "Склад миниатюрный"
+                            Name = "miniature"
                         },
                         new
                         {
                             Id = 2L,
                             MaximumItems = 10000L,
-                            Name = "Склад приличный"
+                            Name = "decent"
                         },
                         new
                         {
                             Id = 3L,
                             MaximumItems = 1000000L,
-                            Name = "Склад здоровенный"
+                            Name = "hefty"
                         });
                 });
 
