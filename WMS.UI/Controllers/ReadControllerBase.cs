@@ -7,7 +7,7 @@ using WMS.BusinessLogic.Services;
 using WMS.BusinessLogic.Utils;
 using WMS.BusinessLogic.Extensions;
 
-namespace WMS.Controllers
+namespace WMS.UI.Controllers
 {
     /// <summary>
     /// Базовый контроллер для чтения данных

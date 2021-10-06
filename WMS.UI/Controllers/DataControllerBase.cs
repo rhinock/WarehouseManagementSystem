@@ -5,7 +5,7 @@ using WMS.BusinessLogic.Extensions;
 using WMS.BusinessLogic.Services;
 using WMS.DataAccess.Models;
 
-namespace WMS.Controllers
+namespace WMS.UI.Controllers
 {
     /// <summary>
     /// Базовый контроллер для записи и валидации данных

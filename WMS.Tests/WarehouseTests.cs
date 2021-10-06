@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Microsoft.AspNetCore.Http;
 using WMS.DataAccess.Models;
+using WMS.UI;
 
 namespace WMS.Tests
 {

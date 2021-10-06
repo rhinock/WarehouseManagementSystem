@@ -8,13 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS", "WMS\WMS.csproj", "{CCD5AA34-CD9C-4A0A-AC38-37B2A7C251AE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS.BusinessLogic", "WMS.BusinessLogic\WMS.BusinessLogic.csproj", "{B92A02DB-D1BD-438B-9CEA-3F91013B2B7F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS.DataAccess", "WMS.DataAccess\WMS.DataAccess.csproj", "{2076537D-0330-47CA-A614-F149448343E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS.Tests", "WMS.Tests\WMS.Tests.csproj", "{C48992DF-4F4C-4624-B6DD-AD46C60F0F4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS.UI", "WMS.UI\WMS.UI.csproj", "{6647CDC4-5C64-4AB8-8B85-6161D70F5715}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CCD5AA34-CD9C-4A0A-AC38-37B2A7C251AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCD5AA34-CD9C-4A0A-AC38-37B2A7C251AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCD5AA34-CD9C-4A0A-AC38-37B2A7C251AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCD5AA34-CD9C-4A0A-AC38-37B2A7C251AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B92A02DB-D1BD-438B-9CEA-3F91013B2B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B92A02DB-D1BD-438B-9CEA-3F91013B2B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B92A02DB-D1BD-438B-9CEA-3F91013B2B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,6 +34,10 @@ Global
 		{C48992DF-4F4C-4624-B6DD-AD46C60F0F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C48992DF-4F4C-4624-B6DD-AD46C60F0F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C48992DF-4F4C-4624-B6DD-AD46C60F0F4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6647CDC4-5C64-4AB8-8B85-6161D70F5715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6647CDC4-5C64-4AB8-8B85-6161D70F5715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6647CDC4-5C64-4AB8-8B85-6161D70F5715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6647CDC4-5C64-4AB8-8B85-6161D70F5715}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

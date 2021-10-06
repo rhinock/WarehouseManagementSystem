@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
-using WMS;
+using WMS.UI;
 using System.Threading.Tasks;
 
 namespace WMS.Tests

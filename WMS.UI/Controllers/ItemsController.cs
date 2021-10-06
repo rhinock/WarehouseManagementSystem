@@ -2,7 +2,7 @@
 using WMS.BusinessLogic.DTO;
 using WMS.DataAccess.Models;
 
-namespace WMS.Controllers
+namespace WMS.UI.Controllers
 {
     /// <summary>
     /// Контроллер для товаров

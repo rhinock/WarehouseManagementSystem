@@ -11,7 +11,7 @@ using WMS.DataAccess.Models;
 using WMS.BusinessLogic.DTO;
 using WMS.BusinessLogic.Mappers;
 
-namespace WMS
+namespace WMS.UI
 {
     public class Startup
     {

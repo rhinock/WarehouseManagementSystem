@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http;
-using WMS;
+using WMS.UI;
 using Xunit;
 using System.Threading.Tasks;
 using System.Text.Json;

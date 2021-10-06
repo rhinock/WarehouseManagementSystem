@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WMS.Tests.EqualityComparers;
-using WMS;
+using WMS.UI;
 using WMS.BusinessLogic.DTO;
 using WMS.BusinessLogic.Extensions;
 using WMS.DataAccess.Models;

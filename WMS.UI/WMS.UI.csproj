@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>WMS</RootNamespace>
-    <AssemblyName>WMS</AssemblyName>
+    <RootNamespace>WMS.UI</RootNamespace>
+    <AssemblyName>WMS.UI</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
