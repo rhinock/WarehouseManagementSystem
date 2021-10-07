@@ -27,37 +27,48 @@ Requirements:
 <table>
 
  <tr>
+  <th>#</th>
   <th>Items</th>
   <th>Warehouses</th>
   <th>WarehouseItems</th>
  </tr>
 
  <tr>
+
   <td>
 
-| Id | Name | Price |
-|:--:|:----:|:-----:|
-| 1 | pencil | 10.00
-| 2 | pen | 20.00
-| 3 | felt-tip pen | 30.00
+| Id |
+|:--:|
+| 1 | 
+| 2 | 
+| 3 | 
 
   </td>
   <td>
 
-| Id | Name | MaximumItems |
-|:--:|:----:|:------------:|
-| 1 | miniature | 100
-| 2 | decent | 10000
-| 3 | hefty | 1000000
+| Name | Price |
+|:----:|:-----:|
+| pencil | 10.00
+| pen | 20.00
+| felt-tip pen | 30.00
 
   </td>
   <td>
 
-| Id | WarehouseId | ItemId | Count |
-|:--:|:-----------:|:------:|:------:
-| 1 | 1 | 1 | 50
-| 2 | 2 | 2 | 5000
-| 3 | 3 | 3 | 500000
+| Name | MaximumItems |
+|:----:|:------------:|
+| miniature | 100
+| decent | 10000
+| hefty | 1000000
+
+  </td>
+  <td>
+
+| WarehouseId | ItemId | Count |
+|:-----------:|:------:|:-----:|
+| 1 | 1 | 50
+| 2 | 2 | 5000
+| 3 | 3 | 500000
 
   </td>
  </tr> 
