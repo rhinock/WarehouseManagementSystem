@@ -85,32 +85,48 @@ Requirements:
 <h2 align=center>Warehouses</h1>
 <h3 align=center>GET</h1>
 
+- Success
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/1
+```
+- Fail
+```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/999
 ```
 
 <h2 align=center>Items</h1>
 <h3 align=center>GET</h1>
 
+- Success
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items
+```
+- Fail
+```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/1
 ```
 
 <h3 align=center>POST</h1>
 
+- Success
 ```
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItem.json"
+```
+- Fail
+```
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItemWithId.json"
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItemWithNegativePrice.json"
 ```
 
 <h3 align=center>PUT</h1>
 
+- Success
 ```
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItem.json"
+```
+- Fail
+```
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectId.json"
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectData.json"
 ```
@@ -118,6 +134,7 @@ curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/ite
 <h2 align=center>WarehouseItems</h1>
 <h3 align=center>GET</h1>
 
+- Success
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems/1
@@ -125,16 +142,24 @@ curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/War
 
 <h3 align=center>POST</h1>
 
+- Success
 ```
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItem.json"
+```
+- Fail
+```
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItemWithId.json"
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItemWithNegativeCount.json"
 ```
 
 <h3 align=center>PUT</h1>
 
+- Success
 ```
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItem.json"
+```
+- Fail
+```
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectId.json"
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectIds.json"
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectData.json"
@@ -142,7 +167,11 @@ curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/war
 
 <h3 align=center>DELETE</h1>
 
+- Success
 ```
 curl -i -H "Content-Type: application/json" -X DELETE http://localhost:8080/api/warehouseitems/1
+```
+- Fail
+```
 curl -i -H "Content-Type: application/json" -X DELETE http://localhost:8080/api/warehouseitems/999
 ```
