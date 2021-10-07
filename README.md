@@ -111,8 +111,7 @@ curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/it
 
 ```
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItem.json"
-curl -i -H "Content-Type: application/json" -X PUT http://
-localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectId.json"
+curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectId.json"
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectData.json"
 ```
 
