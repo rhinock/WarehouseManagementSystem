@@ -110,6 +110,10 @@ curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/war
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/1
 ```
+- Fail
+```
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/999
+```
 
 <h3 align=center>POST</h1>
 
@@ -142,6 +146,10 @@ curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/ite
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems/1
+```
+- Fail
+```
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems/999
 ```
 
 <h3 align=center>POST</h1>
