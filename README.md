@@ -22,7 +22,17 @@ Requirements:
 ![](Diagram.png)
 
 ## Initial Data
-### Items
+
+<table>
+
+ <tr>
+  <th>Items</th>
+  <th>Warehouses</th>
+  <th>WarehouseItems</th>
+ </tr>
+
+ <tr>
+  <td>
 
 | Id | Name | Price |
 |:--:|:----:|:-----:|
@@ -30,7 +40,8 @@ Requirements:
 | 2 | pen | 20.00
 | 3 | felt-tip pen | 30.00
 
-### Warehouses
+  </td>
+  <td>
 
 | Id | Name | MaximumItems |
 |:--:|:----:|:------------:|
@@ -38,13 +49,19 @@ Requirements:
 | 2 | decent | 10000
 | 3 | hefty | 1000000
 
-### WarehouseItems
+  </td>
+  <td>
 
 | Id | WarehouseId | ItemId | Count |
 |:--:|:-----------:|:------:|:------:
 | 1 | 1 | 1 | 50
 | 2 | 2 | 2 | 5000
 | 3 | 3 | 3 | 500000
+
+  </td>
+ </tr> 
+
+</table>
 
 # Docker
 
