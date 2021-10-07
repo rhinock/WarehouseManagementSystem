@@ -95,11 +95,11 @@ Requirements:
 - Success
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/1
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses/1
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/999
+curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses/999
 ```
 
 <h2 align=center>Items</h1>
@@ -108,9 +108,6 @@ curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/ite
 - Success
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items
-```
-- Fail
-```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/1
 ```
 
