@@ -5,7 +5,7 @@ The system provides next functionality:
 - add or edit an item with particular price
 - add, edit or delete an item to/from warehouse with particular amount
 
-Note. Warehouses, Items and WarehouseItems -- are different tables.
+**Note**. Warehouses, Items and WarehouseItems -- are different tables.
 
 Requirements:
 - .NET Core
@@ -16,10 +16,11 @@ Requirements:
 - OOP and SOLID principles
 
 # PostgreSQL
-
 ## Diagram
 
-![](Diagram.png)
+<p align="center">
+ <img src="Diagram.png"/>
+</p>
 
 ## Initial Data
 
