@@ -1,4 +1,4 @@
-# WarehouseManagementSystem
+<h1 align=center>WarehouseManagementSystem</h1>
 
 The system provides next functionality:
 - view list of warehouses, items and warehouse items
@@ -15,14 +15,14 @@ Requirements:
 - integration tests (webhost, xUnit)
 - OOP and SOLID principles
 
-# PostgreSQL
-## Diagram
+<h1 align=center>PostgreSQL</h1>
+<h2 align=center>Diagram</h1>
 
 <p align="center">
  <img src="Diagram.png"/>
 </p>
 
-## Initial Data
+<h2 align=center>Initial Data</h1>
 
 <table>
 
@@ -75,36 +75,40 @@ Requirements:
 
 </table>
 
-# Docker
+<h1 align=center>Docker</h1>
 
 - db-data
   - volume for docker-compose
   - for database recreating should be removed manually
 
-# curl
-## Warehouses
-### GET
+<h1 align=center>curl</h1>
+<h2 align=center>Warehouses</h1>
+<h3 align=center>GET</h1>
+
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/1
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/999
 ```
 
-## Items
-### GET
+<h2 align=center>Items</h1>
+<h3 align=center>GET</h1>
+
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/1
 ```
 
-### POST
+<h3 align=center>POST</h1>
+
 ```
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItem.json"
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItemWithId.json"
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItemWithNegativePrice.json"
 ```
 
-### PUT
+<h3 align=center>PUT</h1>
+
 ```
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItem.json"
 curl -i -H "Content-Type: application/json" -X PUT http://
@@ -112,21 +116,24 @@ localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectId.json"
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectData.json"
 ```
 
-## WarehouseItems
-### GET
+<h2 align=center>WarehouseItems</h1>
+<h3 align=center>GET</h1>
+
 ```
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems/1
 ```
 
-### POST
+<h3 align=center>POST</h1>
+
 ```
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItem.json"
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItemWithId.json"
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItemWithNegativeCount.json"
 ```
 
-### PUT
+<h3 align=center>PUT</h1>
+
 ```
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItem.json"
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectId.json"
@@ -134,7 +141,8 @@ curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/war
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectData.json"
 ```
 
-### DELETE
+<h3 align=center>DELETE</h1>
+
 ```
 curl -i -H "Content-Type: application/json" -X DELETE http://localhost:8080/api/warehouseitems/1
 curl -i -H "Content-Type: application/json" -X DELETE http://localhost:8080/api/warehouseitems/999
