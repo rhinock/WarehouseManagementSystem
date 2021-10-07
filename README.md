@@ -82,6 +82,13 @@ Requirements:
   - for database recreating should be removed manually
 
 <h1 align=center>curl</h1>
+
+| # | GET | POST | PUT | DELETE |
+|:-:|:-:|:-:|:-:|:-:|
+| Warehouses | :heavy_check_mark: | :x: | :x: | :x: |
+| Items | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: |
+| WarehouseItems| :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+
 <h2 align=center>Warehouses</h1>
 <h3 align=center>GET</h1>
 
