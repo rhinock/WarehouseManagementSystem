@@ -1,4 +1,4 @@
-<h1 align=center>WarehouseManagementSystem</h1>
+# WarehouseManagementSystem
 
 The system provides next functionality:
 - view list of warehouses, items and warehouse items
@@ -7,90 +7,63 @@ The system provides next functionality:
 
 **Note**. Warehouses, Items and WarehouseItems -- are different tables.
 
-Requirements:
+Languages, technologies, instruments, etc.:
+- OOP and SOLID principles
+- only server side (WebAPI controllers)
 - .NET Core
 - EF Core
 - PostgreSQL
-- only server side (WebAPI controllers)
 - integration tests (webhost, xUnit)
-- OOP and SOLID principles
+- docker, docker-compose
+- curl
 
-<h1 align=center>PostgreSQL</h1>
-<h2 align=center>Diagram</h1>
+# PostgreSQL
+## Diagram
 
-<p align="center">
- <img src="Diagram.png"/>
-</p>
+![](Diagram.png)
 
-<h2 align=center>Initial Data</h1>
+## Initial Data
+### Items
 
-<table>
+| Id | Name          | Price |
+|:--:|:-------------:|:-----:|
+| 1  | pencil        | 10.00 |
+| 2  | pen           | 20.00 |
+| 3  | felt-tip pen  | 30.00 |
 
- <tr>
-  <th>#</th>
-  <th>Items</th>
-  <th>Warehouses</th>
-  <th>WarehouseItems</th>
- </tr>
+### Warehouses
 
- <tr>
+| Id | Name      | MaximumItems  |
+|:--:|:---------:|:-------------:|
+| 1  | miniature | 100           |
+| 2  | decent    | 10000         |
+| 3  | hefty     | 1000000       |
 
-  <td>
+### WarehouseItems
 
-| Id |
-|:--:|
-| 1 | 
-| 2 | 
-| 3 | 
+| Id | WarehouseId   | ItemId    | Count     |
+|:--:|:-------------:|:---------:|:---------:|
+| 1  | 1             | 1         | 50        |
+| 2  | 2             | 2         | 5000      |
+| 3  | 3             | 3         | 500000    |
 
-  </td>
-  <td>
+# Docker
 
-| Name | Price |
-|:----:|:-----:|
-| pencil | 10.00
-| pen | 20.00
-| felt-tip pen | 30.00
-
-  </td>
-  <td>
-
-| Name | MaximumItems |
-|:----:|:------------:|
-| miniature | 100
-| decent | 10000
-| hefty | 1000000
-
-  </td>
-  <td>
-
-| WarehouseId | ItemId | Count |
-|:-----------:|:------:|:-----:|
-| 1 | 1 | 50
-| 2 | 2 | 5000
-| 3 | 3 | 500000
-
-  </td>
- </tr> 
-
-</table>
-
-<h1 align=center>Docker</h1>
-
-- db-data
+- db-data (data for postgres)
   - volume for docker-compose
   - for database recreating should be removed manually
 
-<h1 align=center>curl</h1>
+# RESTful APIs
 
-| # | GET | POST | PUT | DELETE |
-|:-:|:-:|:-:|:-:|:-:|
-| Warehouses | :heavy_check_mark: | :x: | :x: | :x: |
-| Items | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: |
-| WarehouseItems| :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| #                 | GET                   | POST                  | PUT                   | DELETE                |
+|:-----------------:|:---------------------:|:---------------------:|:---------------------:|:---------------------:|
+| Warehouses        | :heavy_check_mark:    | :x:                   | :x:                   | :x:                   |
+| Items             | :heavy_check_mark:    | :heavy_check_mark:    | :x:                   | :x:                   |
+| WarehouseItems    | :heavy_check_mark:    | :heavy_check_mark:    | :heavy_check_mark:    | :heavy_check_mark:    |
 
-<h2 align=center>Warehouses</h1>
-<h3 align=center>GET</h1>
+# curl
+## Warehouses
+### GET
 
 - Success
 ```
@@ -102,8 +75,8 @@ curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/war
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses/999
 ```
 
-<h2 align=center>Items</h1>
-<h3 align=center>GET</h1>
+## Items
+### GET
 
 - Success
 ```
@@ -115,7 +88,7 @@ curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/ite
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/999
 ```
 
-<h3 align=center>POST</h1>
+### POST
 
 - Success
 ```
@@ -127,7 +100,7 @@ curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/it
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItemWithNegativePrice.json"
 ```
 
-<h3 align=center>PUT</h1>
+### PUT
 
 - Success
 ```
@@ -139,8 +112,8 @@ curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/ite
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectData.json"
 ```
 
-<h2 align=center>WarehouseItems</h1>
-<h3 align=center>GET</h1>
+## WarehouseItems
+### GET
 
 - Success
 ```
@@ -152,7 +125,7 @@ curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/War
 curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems/999
 ```
 
-<h3 align=center>POST</h1>
+### POST
 
 - Success
 ```
@@ -164,7 +137,7 @@ curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/wa
 curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItemWithNegativeCount.json"
 ```
 
-<h3 align=center>PUT</h1>
+### PUT
 
 - Success
 ```
@@ -177,7 +150,7 @@ curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/war
 curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectData.json"
 ```
 
-<h3 align=center>DELETE</h1>
+### DELETE
 
 - Success
 ```
