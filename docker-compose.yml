@@ -1,18 +1,28 @@
 version: "3.3"
 services:
   db:
-    image: postgres:12-alpine
+    image: postgres:${POSTGRES_DB_VERSION}
     environment:
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_USER: postgres
-      POSTGRES_DB: WMS
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - ./db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - back_net
   app:
-    image: wms:latest
-    build:
-      context: .
+    build: .
+    image: wms:${APP_VERSION}
+    networks:
+      - front_net
+      - back_net
     environment:
-      ConnectionStrings__WmsDbContextPostgres: "Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234"
+      ConnectionStrings__WmsDbContextPostgres: "Host=db;Port=${POSTGRES_PORT};Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
     ports:
-      - "8080:80"
+      - "${APP_PORT}:80"
+volumes:
+  db-data:
+
+networks:
+  back_net:
+  front_net:
