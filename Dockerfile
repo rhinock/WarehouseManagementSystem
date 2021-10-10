@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 FROM mcr.microsoft.com/dotnet/sdk:3.1-alpine AS build-env
 WORKDIR /app
 RUN mkdir WMS.UI WMS.BusinessLogic WMS.DataAccess WMS.Tests
