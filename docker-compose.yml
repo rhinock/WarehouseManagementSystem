@@ -12,7 +12,7 @@ services:
       - back_net
   app:
     build: .
-    image: wms:${APP_VERSION}
+    image: rhinock/wms:${APP_VERSION}
     networks:
       - front_net
       - back_net
