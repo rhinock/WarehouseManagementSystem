@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: wms-deployment
+  labels:
+    app: wms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wms
+  template:
+    metadata:
+      labels:
+        app: wms
+    spec:
+      containers:
+      - name: wms
+        image: rhinock/wms:latest
+        env:
+          - name: ConnectionStrings__WmsDbContextPostgres
+            # value: "Host=db;Port=${POSTGRES_PORT};Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
+            value: "Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234"
+          # - name: POSTGRES_SERVICE_HOST
+          #   value: postgres-service
+          # - name: POSTGRES_DATABASE_HOST
+          #   value: WMS
+        ports:
+        - containerPort: 8080

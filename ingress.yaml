@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wms-ingress
+  namespace: default
+spec:
+  rules:
+  - host: wms.com
+    http:
+      paths:
+      - path: /api/items
+        pathType: Prefix
+        backend:
+          service:
+            name: wms-service-nodeport
+            port:
+              number: 80
