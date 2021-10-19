@@ -20,11 +20,12 @@ spec:
         env:
           - name: ConnectionStrings__WmsDbContextPostgres
             # value: "Host=db;Port=${POSTGRES_PORT};Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
-            value: "Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234"
-          # - name: POSTGRES_SERVICE_HOST
-          #   value: postgres-service
+            # value: "Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234"
+            value: "Host=postgres-service-nodeport.default.svc;Port=5432;Database=WMS;Username=postgres;Password=1234"
+            # - name: POSTGRES_SERVICE_HOST
+              # value: postgres-service
           # - name: POSTGRES_DATABASE_HOST
           #   value: WMS
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         resources: {}

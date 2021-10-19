@@ -1,17 +1,24 @@
 apiVersion: networking.k8s.io/v1
+# apiVersion: networking.k8s.io/v1beta1
+# apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: wms-ingress
   namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
   - host: wms.com
     http:
       paths:
-      - path: /api/items
-        pathType: Prefix
-        backend:
-          service:
-            name: wms-service-nodeport
-            port:
-              number: 80
+      # - path: /api/items
+        - path: /api/*
+          pathType: Prefix
+          backend:
+            # serviceName: wms-service-nodeport
+            # servicePort: 80
+            service:
+              name: wms-service-nodeport
+              port:
+                number: 80
