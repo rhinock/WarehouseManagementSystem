@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: {{ .Chart.Name }}-deployment
+  labels:
+    app: wms
+spec:
+  replicas: {{.Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: wms
+  template:
+    metadata:
+      labels:
+        app: wms
+    spec:
+      containers:
+      - name: wms
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+          - name: ConnectionStrings__WmsDbContextPostgres
+            value: "Host={{ .Chart.Name }}-postgres-service;Port=5432;Database={{ .Values.db.dbName }};Username={{ .Values.db.dbUser }};Password={{ .Values.db.dbPassword }}"
+        ports:
+        - containerPort: 80
+        resources: {}

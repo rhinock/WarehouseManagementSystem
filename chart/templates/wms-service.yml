@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wms-service
+  name: {{ .Chart.Name }}-service
 spec:
   ports:
-  - port: 80
+  - port: {{ .Values.service.port }}
     protocol: TCP
     targetPort: 80
+  type: {{ .Values.service.type }}
   selector:
     app: wms
