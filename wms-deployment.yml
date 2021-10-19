@@ -27,3 +27,4 @@ spec:
           #   value: WMS
         ports:
         - containerPort: 8080
+        resources: {}

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.service.type: LoadBalancer
+    kompose.version: 1.24.0 (4a2a0458)
+  # creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      io.kompose.service: app
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.service.type: LoadBalancer
+        kompose.version: 1.24.0 (4a2a0458)
+      # creationTimestamp: null
+      labels:
+        io.kompose.network/backnet: "true"
+        io.kompose.network/frontnet: "true"
+        io.kompose.service: app
+    spec:
+      containers:
+        - env:
+            - name: ConnectionStrings__WmsDbContextPostgres
+              value: Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234
+          image: 'rhinock/wms:latest'
+          name: app
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}
