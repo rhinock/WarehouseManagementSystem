@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: wms-deployment
+  labels:
+    app: wms
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wms
+  template:
+    metadata:
+      labels:
+        app: wms
+    spec:
+      containers:
+      - name: wms
+        image: rhinock/wms:latest
+        env:
+          - name: ConnectionStrings__WmsDbContextPostgres
+            value: "Host=postgres-service;Port=5432;Database=WMS;Username=postgres;Password=1234"
+        ports:
+        - containerPort: 80
+        resources: {}

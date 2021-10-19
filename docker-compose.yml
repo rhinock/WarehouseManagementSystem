@@ -8,25 +8,14 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - db-data:/var/lib/postgresql/data
-    networks:
-      - back_net
     ports:
       - 5432
   app:
     build: .
     image: rhinock/wms:${APP_VERSION}
-    networks:
-      - front_net
-      - back_net
     environment:
       ConnectionStrings__WmsDbContextPostgres: "Host=db;Port=${POSTGRES_PORT};Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
     ports:
       - "${APP_PORT}:80"
-    labels:
-      kompose.service.type: LoadBalancer
 volumes:
   db-data:
-
-networks:
-  back_net:
-  front_net:
