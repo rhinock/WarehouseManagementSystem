@@ -62,17 +62,26 @@ Languages, technologies, instruments, etc.:
 | WarehouseItems    | :heavy_check_mark:    | :heavy_check_mark:    | :heavy_check_mark:    | :heavy_check_mark:    |
 
 # curl
+
+Set corresponding variable:
+```sh
+# for docker
+HOST=localhost:8080
+# for minikube
+HOST=wms.com:80
+```
+
 ## Warehouses
 ### GET
 
 - Success
 ```
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses/1
+curl -v -H "Content-Type: application/json" http://$HOST/api/warehouses
+curl -v -H "Content-Type: application/json" http://$HOST/api/warehouses/1
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/warehouses/999
+curl -v -H "Content-Type: application/json" http://$HOST/api/warehouses/999
 ```
 
 ## Items
@@ -80,36 +89,36 @@ curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/war
 
 - Success
 ```
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/1
+curl -v -H "Content-Type: application/json" http://$HOST/api/items
+curl -v -H "Content-Type: application/json" http://$HOST/api/items/1
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/items/999
+curl -v -H "Content-Type: application/json" http://$HOST/api/items/999
 ```
 
 ### POST
 
 - Success
 ```
-curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItem.json"
+curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/items -d @"payload/CreateItem.json"
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItemWithId.json"
-curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/items -d @"payload/CreateItemWithNegativePrice.json"
+curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/items -d @"payload/CreateItemWithId.json"
+curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/items -d @"payload/CreateItemWithNegativePrice.json"
 ```
 
 ### PUT
 
 - Success
 ```
-curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItem.json"
+curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/items -d @"payload/UpdateItem.json"
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectId.json"
-curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/items -d @"payload/UpdateItemWithIncorrectData.json"
+curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/items -d @"payload/UpdateItemWithIncorrectId.json"
+curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/items -d @"payload/UpdateItemWithIncorrectData.json"
 ```
 
 ## WarehouseItems
@@ -117,46 +126,46 @@ curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/ite
 
 - Success
 ```
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems/1
+curl -v -H "Content-Type: application/json" http://$HOST/api/WarehouseItems
+curl -v -H "Content-Type: application/json" http://$HOST/api/WarehouseItems/1
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X GET http://localhost:8080/api/WarehouseItems/999
+curl -v -H "Content-Type: application/json" http://$HOST/api/WarehouseItems/999
 ```
 
 ### POST
 
 - Success
 ```
-curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItem.json"
+curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/warehouseitems -d @"payload/CreateWarehouseItem.json"
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItemWithId.json"
-curl -i -H "Content-Type: application/json" -X POST http://localhost:8080/api/warehouseitems -d @"payload/CreateWarehouseItemWithNegativeCount.json"
+curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/warehouseitems -d @"payload/CreateWarehouseItemWithId.json"
+curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/warehouseitems -d @"payload/CreateWarehouseItemWithNegativeCount.json"
 ```
 
 ### PUT
 
 - Success
 ```
-curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItem.json"
+curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/warehouseitems -d @"payload/UpdateWarehouseItem.json"
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectId.json"
-curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectIds.json"
-curl -i -H "Content-Type: application/json" -X PUT http://localhost:8080/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectData.json"
+curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectId.json"
+curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectIds.json"
+curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectData.json"
 ```
 
 ### DELETE
 
 - Success
 ```
-curl -i -H "Content-Type: application/json" -X DELETE http://localhost:8080/api/warehouseitems/1
+curl -v -H "Content-Type: application/json" -X DELETE http://$HOST/api/warehouseitems/1
 ```
 - Fail
 ```
-curl -i -H "Content-Type: application/json" -X DELETE http://localhost:8080/api/warehouseitems/999
+curl -v -H "Content-Type: application/json" -X DELETE http://$HOST/api/warehouseitems/999
 ```
