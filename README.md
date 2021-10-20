@@ -113,9 +113,9 @@ SELECT * FROM public."WarehouseItems";
 ## Push image to hub.docker.com
 
 ```docker
-# docker tag wms:latest <login>/<application>:latest
+# docker tag <image>:<tag> <login>/<image>:<tag>
 docker tag wms:latest rhinock/wms:latest
-# docker push <login>/<application>:latest
+# docker push <login>/<image>:<tag>
 docker push rhinock/wms:latest
 ```
 
