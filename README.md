@@ -312,6 +312,37 @@ k get po
 - [Helm Install](https://helm.sh/docs/helm/helm_install/)
 - [Helm Uninstall](https://helm.sh/docs/helm/helm_uninstall/)
 
+## Install helm chart
+
+```sh
+helm install wms chart/
+
+k get sc
+k get pv
+k get pvc
+k get sts
+k get deployments.apps
+k get svc
+k get ingress
+k get po
+```
+
+## Uninstall helm chart
+
+```sh
+helm uninstall wms
+k delete pvc pg-data-wms-postgres-statefulset-0
+
+k get sc
+k get pv
+k get pvc
+k get sts
+k get deployments.apps
+k get svc
+k get ingress
+k get po
+```
+
 # RESTful APIs
 
 | #                 | GET                   | POST                  | PUT                   | DELETE                |
