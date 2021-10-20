@@ -277,6 +277,9 @@ k get svc
 # Ingresses
 k get ingress
 
+# Endpoints
+k get endpoints
+
 # Pods
 k get po
 ```
@@ -294,6 +297,7 @@ k get sts
 k get deployments.apps
 k get svc
 k get ingress
+k get endpoints
 k get po
 ```
 
@@ -324,6 +328,7 @@ k get sts
 k get deployments.apps
 k get svc
 k get ingress
+k get endpoints
 k get po
 ```
 
@@ -340,6 +345,7 @@ k get sts
 k get deployments.apps
 k get svc
 k get ingress
+k get endpoints
 k get po
 ```
 
