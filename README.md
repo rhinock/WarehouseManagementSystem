@@ -83,9 +83,11 @@ docker image rm rhinock/wms:latest
 docker image rm wms:latest
 docker image rm mcr.microsoft.com/dotnet/sdk:3.1-alpine
 docker image rm mcr.microsoft.com/dotnet/aspnet:3.1-alpine
-docker image prune
+docker image prune -f
+docker volume prune -f
 
 docker image ls -a
+docker volume ls
 ```
 
 ## Run application with bridge network driver
@@ -110,9 +112,11 @@ docker container rm -f postgres
 docker image rm postgres:12-alpine
 docker image rm rhinock/wms:latest
 docker network rm app
+docker volume prune -f
 
 docker network ls
 docker image ls -a
+docker volume ls
 docker container ls -a
 ```
 
@@ -162,8 +166,10 @@ docker container rm -f wms
 docker container rm -f postgres
 docker image rm postgres:12-alpine
 docker image rm rhinock/wms:latest
+docker volume prune -f
 
 docker image ls -a
+docker volume ls
 docker container ls -a
 ```
 
@@ -199,10 +205,12 @@ docker image rm rhinock/wms:latest
 docker image rm postgres:12-alpine
 docker image rm mcr.microsoft.com/dotnet/sdk:3.1-alpine
 docker image rm mcr.microsoft.com/dotnet/aspnet:3.1-alpine
-docker image prune
+docker image prune -f
+docker volume prune -f
 
 docker network ls
 docker image ls -a
+docker volume ls
 docker container ls -a
 ```
 
@@ -223,8 +231,10 @@ docker container ls -a
 docker-compose down
 docker image rm postgres:12-alpine
 docker image rm rhinock/wms:latest
+docker volume prune -f
 
 docker network ls
+docker volume ls
 docker image ls -a
 docker container ls -a
 ```
