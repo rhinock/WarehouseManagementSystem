@@ -232,6 +232,7 @@ docker container ls -a
 # Kubernetes (minikube)
 
 - [minikube start](https://minikube.sigs.k8s.io/docs/start/)
+- [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 - [Hack the StorageClass](https://platform9.com/blog/tutorial-dynamic-provisioning-of-persistent-storage-in-kubernetes-with-minikube/)
   - [storageClass.yaml](k8s/storageClass.yaml)
 - [StatefulSets Components](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#components)
@@ -248,6 +249,52 @@ docker container ls -a
 ```sh
 # <minikube ip> wms.com
 192.168.49.2 wms.com
+```
+
+## Apply manifests
+
+```sh
+k apply -f k8s/
+
+# Storage Classes
+k get sc
+
+# Persistent Volumes
+k get pv
+
+# Persistent Volume Claims
+k get pvc
+
+# Stateful Sets
+k get sts
+
+# Deployments
+k get deployments.apps
+
+# Services
+k get svc
+
+# Ingresses
+k get ingress
+
+# Pods
+k get po
+```
+
+## Remove Kubernetes generated items
+
+```sh
+k delete -f k8s/
+k delete pvc pg-data-postgres-statefulset-0
+
+k get sc
+k get pv
+k get pvc
+k get sts
+k get deployments.apps
+k get svc
+k get ingress
+k get po
 ```
 
 # Helm
