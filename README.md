@@ -50,12 +50,74 @@ Languages, technologies, instruments, etc.:
 | 2  | 2             | 2         | 5000      |
 | 3  | 3             | 3         | 500000    |
 
+# dotnet
+
+```dotnet
+dotnet run WMS.UI/WMS.UI.csproj
+```
+
 # Docker
 
 - [Get Docker](https://docs.docker.com/get-docker/)
 - [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 - [Dockerize an ASP.NET Core application](https://docs.docker.com/samples/dotnetcore/)
-  - Dockerfile
+- [postgres - How to use this image](https://hub.docker.com/_/postgres)
+- [Network settings](https://docs.docker.com/engine/reference/run/#network-settings)
+
+## With bridge network driver
+
+```docker
+docker network create app --driver bridge
+
+docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=WMS --network-alias=db -d --network=app postgres:12-alpine
+
+docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234" -d --network=app -p 8080:80 wms:latest
+```
+
+## Without bridge network driver
+
+```docker
+docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=WMS -d postgres:12-alpine
+
+docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234" -d -p 8080:80 --link postgres:db wms:latest
+```
+
+## env variables
+
+```sh
+docker exec postgres env | grep 'POSTGRES_USER\|POSTGRES_PASSWORD\|POSTGRES_DB'
+docker exec wms env | grep ConnectionStrings__WmsDbContextPostgres
+```
+
+## psql
+
+```sh
+docker exec -it postgres psql -U postgres
+```
+
+```psql
+# list databases
+\l
+# connect to database 'WMS'
+\c WMS
+# list all schemas
+\dn
+# list all tables in schema 'public'
+\dt public.*
+# select data from all tables
+SELECT * FROM public."Items";
+SELECT * FROM public."Warehouses";
+SELECT * FROM public."WarehouseItems";
+```
+
+## Push image to hub.docker.com
+
+```docker
+# docker tag wms:latest <login>/<application>:latest
+docker tag wms:latest rhinock/wms:latest
+# docker push <login>/<application>:latest
+docker push rhinock/wms:latest
+```
 
 # Docker Compose  
 
