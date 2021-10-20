@@ -52,7 +52,7 @@ Languages, technologies, instruments, etc.:
 
 # dotnet
 
-```dotnet
+```sh
 dotnet run WMS.UI/WMS.UI.csproj
 ```
 
@@ -64,22 +64,67 @@ dotnet run WMS.UI/WMS.UI.csproj
 - [postgres - How to use this image](https://hub.docker.com/_/postgres)
 - [Network settings](https://docs.docker.com/engine/reference/run/#network-settings)
 
-## With bridge network driver
+## Build image and push to hub.docker.com
 
-```docker
+```sh
+docker build -t wms:latest .
+# docker tag <image>:<tag> <login>/<image>:<tag>
+docker tag wms:latest rhinock/wms:latest
+# docker push <login>/<image>:<tag>
+docker push rhinock/wms:latest
+
+docker image ls -a
+```
+
+### Remove Dockerfile generated items 
+
+```sh
+docker image rm rhinock/wms:latest
+docker image rm wms:latest
+docker image rm mcr.microsoft.com/dotnet/sdk:3.1-alpine
+docker image rm mcr.microsoft.com/dotnet/aspnet:3.1-alpine
+docker image prune
+
+docker image ls -a
+```
+
+## Run application with bridge network driver
+
+```sh
 docker network create app --driver bridge
 
 docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=WMS --network-alias=db -d --network=app postgres:12-alpine
 
-docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234" -d --network=app -p 8080:80 wms:latest
+docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234" -d --network=app -p 8080:80 rhinock/wms:latest
+
+docker network ls
+docker image ls -a
+docker container ls -a
 ```
 
-## Without bridge network driver
+### Remove Dockerfile generated items 
+
+```sh
+docker container rm -f wms
+docker container rm -f postgres
+docker image rm postgres:12-alpine
+docker image rm rhinock/wms:latest
+docker network rm app
+
+docker network ls
+docker image ls -a
+docker container ls -a
+```
+
+## Run application without bridge network driver
 
 ```docker
 docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=WMS -d postgres:12-alpine
 
-docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234" -d -p 8080:80 --link postgres:db wms:latest
+docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234" -d -p 8080:80 --link postgres:db rhinock/wms:latest
+
+docker image ls -a
+docker container ls -a
 ```
 
 ## env variables
@@ -110,13 +155,16 @@ SELECT * FROM public."Warehouses";
 SELECT * FROM public."WarehouseItems";
 ```
 
-## Push image to hub.docker.com
+## Remove Dockerfile generated items
 
-```docker
-# docker tag <image>:<tag> <login>/<image>:<tag>
-docker tag wms:latest rhinock/wms:latest
-# docker push <login>/<image>:<tag>
-docker push rhinock/wms:latest
+```sh
+docker container rm -f wms
+docker container rm -f postgres
+docker image rm postgres:12-alpine
+docker image rm rhinock/wms:latest
+
+docker image ls -a
+docker container ls -a
 ```
 
 # Docker Compose  
@@ -132,6 +180,54 @@ docker push rhinock/wms:latest
     - db-data (data for postgres)
       - volume for docker-compose
       - for database recreating should be removed manually
+
+## Build images locally
+
+```sh
+docker-compose up -d
+
+docker network ls
+docker image ls -a
+docker container ls -a
+```
+
+### Remove Docker Compose generated items
+
+```sh
+docker-compose down
+docker image rm rhinock/wms:latest
+docker image rm postgres:12-alpine
+docker image rm mcr.microsoft.com/dotnet/sdk:3.1-alpine
+docker image rm mcr.microsoft.com/dotnet/aspnet:3.1-alpine
+docker image prune
+
+docker network ls
+docker image ls -a
+docker container ls -a
+```
+
+## Pull images from hub.docker.com
+
+```sh
+docker-compose pull
+docker-compose up -d
+
+docker network ls
+docker image ls -a
+docker container ls -a
+```
+
+### Remove Docker Compose generated items
+
+```sh
+docker-compose down
+docker image rm postgres:12-alpine
+docker image rm rhinock/wms:latest
+
+docker network ls
+docker image ls -a
+docker container ls -a
+```
 
 # Kubernetes (minikube)
 
