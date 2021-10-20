@@ -23,8 +23,8 @@ spec:
           env:
             - name: POSTGRES_DB
               value: WMS
-            - name: POSTGRES_USER
-              value: postgres
+            # - name: POSTGRES_USER
+            #   value: postgres
             - name: POSTGRES_PASSWORD
               value: "1234"
           volumeMounts:

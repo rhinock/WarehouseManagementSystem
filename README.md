@@ -53,7 +53,7 @@ Languages, technologies, instruments, etc.:
 # dotnet
 
 ```sh
-dotnet run WMS.UI/WMS.UI.csproj
+dotnet run --project WMS.UI/WMS.UI.csproj
 ```
 
 # Docker
@@ -95,9 +95,9 @@ docker volume ls
 ```sh
 docker network create app --driver bridge
 
-docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=WMS --network-alias=db -d --network=app postgres:12-alpine
+docker run --name postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=WMS -d --network=app postgres:12-alpine
 
-docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234" -d --network=app -p 8080:80 rhinock/wms:latest
+docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=postgres;Port=5432;Database=WMS;Username=postgres;Password=1234" -d --network=app -p 8080:80 rhinock/wms:latest
 
 docker network ls
 docker image ls -a
@@ -123,9 +123,9 @@ docker container ls -a
 ## Run application without bridge network driver
 
 ```docker
-docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=WMS -d postgres:12-alpine
+docker run --name postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=WMS -d postgres:12-alpine
 
-docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=db;Port=5432;Database=WMS;Username=postgres;Password=1234" -d -p 8080:80 --link postgres:db rhinock/wms:latest
+docker run --name wms -e ConnectionStrings__WmsDbContextPostgres="Host=postgres;Port=5432;Database=WMS;Username=postgres;Password=1234" -d -p 8080:80 --link postgres:postgres rhinock/wms:latest
 
 docker image ls -a
 docker container ls -a
@@ -134,7 +134,7 @@ docker container ls -a
 ## env variables
 
 ```sh
-docker exec postgres env | grep 'POSTGRES_USER\|POSTGRES_PASSWORD\|POSTGRES_DB'
+docker exec postgres env | grep 'POSTGRES_PASSWORD\|POSTGRES_DB'
 docker exec wms env | grep ConnectionStrings__WmsDbContextPostgres
 ```
 
@@ -222,6 +222,7 @@ docker-compose up -d
 
 docker network ls
 docker image ls -a
+docker volume ls
 docker container ls -a
 ```
 
@@ -281,6 +282,9 @@ k get sts
 # Deployments
 k get deployments.apps
 
+# Replica Sets
+k get rs
+
 # Services
 k get svc
 
@@ -305,6 +309,7 @@ k get pv
 k get pvc
 k get sts
 k get deployments.apps
+k get rs
 k get svc
 k get ingress
 k get endpoints
@@ -336,6 +341,7 @@ k get pv
 k get pvc
 k get sts
 k get deployments.apps
+k get rs
 k get svc
 k get ingress
 k get endpoints
@@ -353,6 +359,7 @@ k get pv
 k get pvc
 k get sts
 k get deployments.apps
+k get rs
 k get svc
 k get ingress
 k get endpoints
@@ -371,6 +378,8 @@ k get po
 
 Set corresponding variable for:
 ```sh
+# for local deployment
+HOST=localhost:5000
 # docker and docker-compose
 HOST=localhost:8080
 # kubernetes (minikube) and helm
