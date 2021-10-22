@@ -61,7 +61,7 @@ dotnet run --project WMS.UI/WMS.UI.csproj
 | #                 | GET                   | POST                  | PUT                   | DELETE                |
 |:-----------------:|:---------------------:|:---------------------:|:---------------------:|:---------------------:|
 | Warehouses        | :heavy_check_mark:    | :x:                   | :x:                   | :x:                   |
-| Items             | :heavy_check_mark:    | :heavy_check_mark:    | :x:                   | :x:                   |
+| Items             | :heavy_check_mark:    | :heavy_check_mark:    | :heavy_check_mark:    | :x:                   |
 | WarehouseItems    | :heavy_check_mark:    | :heavy_check_mark:    | :heavy_check_mark:    | :heavy_check_mark:    |
 
 # Docker
