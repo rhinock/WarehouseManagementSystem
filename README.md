@@ -415,9 +415,70 @@ k get endpoints
 k get po
 ```
 
-# curl
+# PowerShell Modules [Windows only]
 
-Set corresponding variable for:
+- [How to create a PowerShell Module to Interact with a REST API](https://www.veeam.com/blog/how-to-create-a-powershell-module-to-interact-with-rest-api.html)
+
+## Creating the Module Folder and Files
+
+```powershell
+New-Item -Type Directory -Name PowerShell
+```
+
+## Creating the PowerShell Module Manifest (PSD1)
+
+```powershell
+# Use splatting technique to make it more readable
+$ModuleManifestParams = @{
+    Path            = "PowerShell\WMS.psd1" # Notice that the psd1 file has the same name as the folder it resides in
+    Guid            = [GUID]::NewGuid().Guid # A unique GUID for the module for identification
+    Author          = "Your Name Here" # Optional
+    CompanyName     = "Company Name here" # Optional
+    ModuleVersion   = "0.0.1" # Semantic versioning as recommended best practice for PowerShell modules
+    Description     = "A PowerShell module to interact with the HttpBin API" # A short description of what the module does
+}
+
+# Run New-ModuleManifest with the splatted parameters
+New-ModuleManifest @ModuleManifestParams
+```
+- [WMS.psd1](PowerShell/WMS.psd1)
+
+## Creating the PowerShell Module (PSM1)
+
+```powershell
+New-Item -ItemType File -Path PowerShell\ -Name WMS.psm1
+```
+
+The .psm1 file is the file that will hold all module functions. Creating the PowerShell module file (.psm1) is just as simple as using PowerShell editor of our choice to create a new, blank text file at the C:.psm1 path.
+- [WMS.psm1](PowerShell/WMS.psm1)
+
+## Adding the Base URI the the Module
+
+```powershell
+$script:BaseUri = "api"
+$script:InvokeParams = @{
+    ContentType = "application/json"
+}
+```
+- [`$script:BaseUri`](PowerShell/WMS.psm1)
+- [`$script:InvokeParams`](PowerShell/WMS.psm1)
+
+## Writing the Functions
+
+- [`GetObjects`](PowerShell/WMS.psm1)
+- [`PostOrPutObject`](PowerShell/WMS.psm1)
+- [`DeleteObject`](PowerShell/WMS.psm1)
+
+## Importing the Module
+
+Now that you've created the first function in the module, it's time to start using it. Import the module using the `Import-Module` command as shown below.
+```powershell
+Import-Module -Name .\PowerShell\WMS.psm1 -Verbose -Force
+```
+
+# curl | PowerShell [Windows only]
+
+curl variables:
 ```sh
 # local deployment
 HOST=localhost:5000
@@ -427,93 +488,205 @@ HOST=localhost:8080
 HOST=wms.com:80
 ```
 
+PowerShell parameters:
+```powershell
+# local deployment
+-Protocol https
+-Host localhost
+-Port 44385
+# docker and docker-compose
+-Protocol http
+-Host localhost
+-Port 8080
+# kubernetes (minikube) and helm
+-Protocol http
+-Host wms.com
+-Port 80
+```
+
 ## Warehouses
 ### GET
 #### Success
+
 ```sh
 curl -v -H "Content-Type: application/json" http://$HOST/api/warehouses
 curl -v -H "Content-Type: application/json" http://$HOST/api/warehouses/1
 ```
+
+```powershell
+GetObjects -Objects Warehouses
+GetObjects -Objects Warehouses -Id 1
+```
+
 #### Fail
+
 ```sh
 curl -v -H "Content-Type: application/json" http://$HOST/api/warehouses/999
+```
+
+```powershell
+GetObjects -Objects Warehouses -Id 999
 ```
 
 ## Items
 ### GET
 #### Success
+
 ```sh
 curl -v -H "Content-Type: application/json" http://$HOST/api/items
 curl -v -H "Content-Type: application/json" http://$HOST/api/items/1
 ```
+
+```powershell
+GetObjects -Objects Items
+GetObjects -Objects Items -Id 1
+```
+
 #### Fail
+
 ```sh
 curl -v -H "Content-Type: application/json" http://$HOST/api/items/999
 ```
 
+```powershell
+GetObjects -Objects Items -Id 999
+```
+
 ### POST
 #### Success
+
 ```sh
 curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/items -d @"payload/CreateItem.json"
 ```
+
+```powershell
+PostOrPutObject -Objects Items -Method Post -JsonFilePath .\payload\CreateItem.json
+```
+
 #### Fail
+
 ```sh
 curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/items -d @"payload/CreateItemWithId.json"
 curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/items -d @"payload/CreateItemWithNegativePrice.json"
 ```
 
+```powershell
+PostOrPutObject -Objects Items -Method Post -JsonFilePath .\payload\CreateItemWithId.json
+PostOrPutObject -Objects Items -Method Post -JsonFilePath .\payload\CreateItemWithNegativePrice.json
+```
+
 ### PUT
 #### Success
+
 ```sh
 curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/items -d @"payload/UpdateItem.json"
 ```
+
+```powershell
+PostOrPutObject -Objects Items -Method Put -JsonFilePath .\payload\UpdateItem.json
+```
+
 #### Fail
+
 ```sh
 curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/items -d @"payload/UpdateItemWithIncorrectId.json"
 curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/items -d @"payload/UpdateItemWithIncorrectData.json"
 ```
 
+```powershell
+PostOrPutObject -Objects Items -Method Put -JsonFilePath .\payload\UpdateItemWithIncorrectId.json
+PostOrPutObject -Objects Items -Method Put -JsonFilePath .\payload\UpdateItemWithIncorrectData.json
+```
+
 ## WarehouseItems
 ### GET
 #### Success
+
 ```sh
 curl -v -H "Content-Type: application/json" http://$HOST/api/WarehouseItems
 curl -v -H "Content-Type: application/json" http://$HOST/api/WarehouseItems/1
 ```
+
+```powershell
+GetObjects -Objects WarehouseItems
+GetObjects -Objects WarehouseItems -Id 1
+```
+
 #### Fail
+
 ```sh
 curl -v -H "Content-Type: application/json" http://$HOST/api/WarehouseItems/999
 ```
 
+```powershell
+GetObjects -Objects WarehouseItems -Id 999
+```
+
 ### POST
 #### Success
+
 ```sh
 curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/warehouseitems -d @"payload/CreateWarehouseItem.json"
 ```
+
+```powershell
+PostOrPutObject -Objects WarehouseItems -Method Post -JsonFilePath .\payload\CreateWarehouseItem.json
+```
+
 #### Fail
+
 ```sh
 curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/warehouseitems -d @"payload/CreateWarehouseItemWithId.json"
 curl -v -H "Content-Type: application/json" -X POST http://$HOST/api/warehouseitems -d @"payload/CreateWarehouseItemWithNegativeCount.json"
 ```
 
+```powershell
+PostOrPutObject -Objects WarehouseItems -Method Post -JsonFilePath .\payload\CreateWarehouseItemWithId.json
+PostOrPutObject -Objects WarehouseItems -Method Post -JsonFilePath .\payload\CreateWarehouseItemWithNegativeCount.json
+```
+
 ### PUT
 #### Success
+
 ```sh
 curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/warehouseitems -d @"payload/UpdateWarehouseItem.json"
 ```
+
+```powershell
+PostOrPutObject -Objects WarehouseItems -Method Put -JsonFilePath .\payload\UpdateWarehouseItem.json
+```
+
 #### Fail
+
 ```sh
 curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectId.json"
 curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectIds.json"
 curl -v -H "Content-Type: application/json" -X PUT http://$HOST/api/warehouseitems -d @"payload/UpdateWarehouseItemWithIncorrectData.json"
 ```
 
+```powershell
+PostOrPutObject -Objects WarehouseItems -Method Put -JsonFilePath .\payload\UpdateWarehouseItemWithIncorrectId.json
+PostOrPutObject -Objects WarehouseItems -Method Put -JsonFilePath .\payload\UpdateWarehouseItemWithIncorrectIds.json
+PostOrPutObject -Objects WarehouseItems -Method Put -JsonFilePath .\payload\UpdateWarehouseItemWithIncorrectData.json
+```
+
 ### DELETE
 #### Success
+
 ```sh
 curl -v -H "Content-Type: application/json" -X DELETE http://$HOST/api/warehouseitems/1
 ```
+
+```powershell
+DeleteObject -Objects WarehouseItems -Id 1
+```
+
 #### Fail
+
 ```sh
 curl -v -H "Content-Type: application/json" -X DELETE http://$HOST/api/warehouseitems/999
+```
+
+```powershell
+DeleteObject -Objects WarehouseItems -Id 999
 ```
