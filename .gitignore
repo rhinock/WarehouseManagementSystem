@@ -351,3 +351,6 @@ MigrationBackup/
 
 # data for postgres
 /db-data
+
+# archives for helm
+*.tgz

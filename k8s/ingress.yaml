@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wms-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - host: wms.com
+    http:
+      paths:
+        - path: /api/*
+          pathType: Prefix
+          backend:
+            service:
+              name: wms-service
+              port:
+                number: 80

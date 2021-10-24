@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Chart.Name }}-postgres-statefulset
+spec:
+  replicas: 1
+  serviceName: {{ .Chart.Name }}-postgres-service
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: postgres
+          image: "{{ .Values.db.repository }}:{{ .Values.db.tag}}"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: {{ .Values.db.dbName }}
+            - name: POSTGRES_USER
+              value: {{ .Values.db.dbUser }}
+            - name: POSTGRES_PASSWORD
+              value: "{{ .Values.db.dbPassword }}"
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pg-data
+          resources: {}
+  volumeClaimTemplates:
+    - metadata:
+        name: pg-data
+      spec:
+        storageClassName: standard
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
