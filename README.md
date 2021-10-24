@@ -19,6 +19,7 @@ Languages, technologies, instruments, etc.:
 - kubernetes (minikube)
 - helm
 - curl
+- PowerShell
 
 # PostgreSQL
 ## Diagram
