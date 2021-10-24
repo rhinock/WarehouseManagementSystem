@@ -471,7 +471,7 @@ $script:InvokeParams = @{
 
 ## Importing the Module
 
-Now that you’ve created the first function in the module, it’s time to start using it. Import the module using the `Import-Module` command as shown below.
+Now that you've created the first function in the module, it's time to start using it. Import the module using the `Import-Module` command as shown below.
 ```powershell
 Import-Module -Name .\PowerShell\WMS.psm1 -Verbose -Force
 ```
